@@ -13,5 +13,6 @@ router.post("/saveTaskWork/:_id", auth, board.saveTaskWork);
 router.post("/saveTaskImg", mult, formatFile, auth, board.saveTaskImg);
 router.put("/updateTask", auth, board.updateTask);
 router.delete("/deleteTask/:_id", auth, validId, board.deleteTask);
+router.put("/editTask", auth, board.editTask);
 
 export default router;
