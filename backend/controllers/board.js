@@ -1,13 +1,18 @@
 import board from "../models/board.js";
+import workBoard from "../models/workBoard.js";
 import fs from "fs";
 import path from "path";
 import moment from "moment";
 
-const saveTask = async (req, res) => {
+const saveTaskWork = async (req, res) => {
   if (!req.body.name || !req.body.description)
     return res.status(400).send({ message: "Incomplete data" });
 
+  const workFind = await workBoard.findById({ _id: req.params["_id"] });
+  if (!workFind) res.status(400).send({ message: "work not found" });
+
   const boardSchema = new board({
+    workBoardId: workFind._id,
     userId: req.user._id,
     name: req.body.name,
     description: req.body.description,
@@ -24,6 +29,9 @@ const saveTask = async (req, res) => {
 const saveTaskImg = async (req, res) => {
   if (!req.body.name || !req.body.description)
     return res.status(400).send({ message: "Incomplete data" });
+
+  const workFind = await workBoard.findById({ _id: req.params["_id"] });
+  if (!workFind) res.status(400).send({ message: "work not found" });
 
   let imageUrl = "";
   if (Object.keys(req.files).length === 0) {
@@ -47,6 +55,7 @@ const saveTaskImg = async (req, res) => {
   }
 
   const boardSchema = new board({
+    workBoardId: workFind._id,
     userId: req.user._id,
     name: req.body.name,
     description: req.body.description,
@@ -65,6 +74,16 @@ const listTask = async (req, res) => {
   return taskList.length === 0
     ? res.status(400).send({ message: "You have no assigned tasks" })
     : res.status(200).send({ taskList });
+};
+
+const listBoardByIdWork = async (req, res) => {
+  const boardList = await board.find({
+    workBoardId: req.params["_id"],
+  });
+
+  return boardList.length === 0
+    ? res.status(400).send({ message: "You no have work board assigned" })
+    : res.status(200).send({ boardList });
 };
 
 const updateTask = async (req, res) => {
@@ -98,4 +117,51 @@ const deleteTask = async (req, res) => {
   }
 };
 
-export default { saveTask, saveTaskImg, listTask, updateTask, deleteTask };
+const editTask = async (req, res) => {
+  if (
+    !req.body._id ||
+    (!req.body.name && !req.body.description && !req.body.imageUrl)
+  )
+    return res.status(400).send({ message: "Incomplete data" });
+
+  let imageUrl = "";
+  if (Object.keys(req.files).length === 0) {
+    imageUrl = "";
+  } else {
+    if (req.files.image) {
+      if (req.files.image.type != null) {
+        const url = req.protocol + "://" + req.get("host") + "/";
+        const serverImg =
+          "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+        fs.createReadStream(req.files.image.path).pipe(
+          fs.createWriteStream(serverImg)
+        );
+        imageUrl =
+          url +
+          "uploads/" +
+          moment().unix() +
+          path.extname(req.files.image.path);
+      }
+    }
+  }
+
+  const taskEdit = await board.findByIdAndUpdate(req.body._id, {
+    name: req.body.name,
+    description: req.body.description,
+    imageUrl: imageUrl,
+  });
+
+  return !taskEdit
+    ? res.status(400).send({ message: "Task not found" })
+    : res.status(200).send({ message: "edited task" });
+};
+
+export default {
+  saveTaskImg,
+  listTask,
+  saveTaskWork,
+  updateTask,
+  deleteTask,
+  editTask,
+  listBoardByIdWork,
+};

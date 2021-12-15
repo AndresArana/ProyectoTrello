@@ -5,14 +5,10 @@
         New user
       </button>
     </div>
+    <br />
     <mat-form-field class="bgShearch">
       <mat-label>search User</mat-label>
-      <input
-        matInput
-        (keyup)="applyFilter($event)"
-        placeholder=""
-        #input
-      />
+      <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
     </mat-form-field>
 
     <div class="mat-elevation-z8">

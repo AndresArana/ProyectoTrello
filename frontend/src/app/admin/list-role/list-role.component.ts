@@ -57,10 +57,9 @@ export class ListRoleComponent implements OnInit {
         let index = this.roleData.indexOf(role);
         if (index > -1) {
           this.roleData.splice(index, 1);
-          this.dataSource = new MatTableDataSource(this.roleData)
+          this.dataSource = new MatTableDataSource(this.roleData);
           this.message = v.message;
           this.openSnackBarSuccesfull();
-          
         }
       },
       error: (e) => {
