@@ -3,6 +3,7 @@ import role from "../models/role.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import moment from "moment";
+import transporter from "../middlewares/mailer.js";
 
 const registerUser = async (req, res) => {
   if (!req.body.name || !req.body.email || !req.body.password)
@@ -115,8 +116,7 @@ const getUserRole = async (req, res) => {
     .findOne({ email: req.params.email })
     .populate("roleId")
     .exec();
-  if (!userRole)
-    return res.status(400).send({ message: "No search results" });
+  if (!userRole) return res.status(400).send({ message: "No search results" });
 
   userRole = userRole.roleId.name;
   return res.status(200).send({ userRole });
@@ -174,7 +174,7 @@ const deleteUser = async (req, res) => {
   return !userDelete
     ? res.status(400).send({ message: "user no found" })
     : res.status(200).send({ message: "user deleted" });
-}
+};
 
 const login = async (req, res) => {
   if (!req.body.email || !req.body.password)
@@ -205,6 +205,82 @@ const login = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req, res) => {
+  if (!req.body.password || !req.body.password2)
+    return res.status(400).send({ message: "Incomplete data" });
+
+  const searchUser = await user.findById({ _id: req.body._id });
+
+  let pass = "";
+  if (req.body.password == req.body.password2) {
+    const passHash = await bcrypt.compare(
+      req.body.password,
+      searchUser.password
+    );
+    if (!passHash) {
+      pass = await bcrypt.hash(req.body.password, 10);
+    } else {
+      return res.status(400).send({
+        message: "the password must be different from the previous ones",
+      });
+    }
+  } else {
+    return res.status(400).send({
+      message: "Passwords do not match",
+    });
+  }
+
+  const userUpdate = await user.findByIdAndUpdate(req.body._id, {
+    password: pass,
+  });
+
+  return !userUpdate
+    ? res.status(400).send({ message: "error retrieving password" })
+    : res.status(200).send({ message: "password recovered" });
+};
+
+const send = async (req, res) => {
+  if (!req.body.email)
+    return res.status(400).send({ message: "Incomplete data" });
+
+  const searchUser = await user.findOne({ email: req.body.email });
+  if (!searchUser)
+    return res.status(400).send({ message: "email does not exist" });
+
+  try {
+    const token = jwt.sign(
+      {
+        _id: searchUser._id,
+        name: searchUser.name,
+        roleId: searchUser.roleId,
+        iat: moment().unix(),
+      },
+      process.env.SK_JWT,
+      {
+        expiresIn: "10m",
+      }
+    );
+    let verificationLink = "http://localhost:3001/api/user/forgotPassword";
+    const info = await transporter.sendMail({
+      from: '"Debbel 👻" <joya1028@gmail.com>',
+      to: searchUser.email,
+      subject: "Forgot password? ✔",
+      html: `
+      <p>Hello ${searchUser.name} </p>
+      <p>if you want to reset your password</p>
+      <p>Please enter on the follow link</p>
+      <br>
+      <a href="${verificationLink}">${verificationLink}</a>
+      `,
+    });
+    return !info
+      ? res.status(400).send({ message: "error sending mail" })
+      : res.status(200).send({ message: "email sent", token });
+  } catch (e) {
+    return res.status(400).send({ message: "Token error " + e });
+  }
+};
+
 export default {
   registerUser,
   registerAdminUser,
@@ -215,4 +291,6 @@ export default {
   deleteUser,
   login,
   getUserRole,
+  forgotPassword,
+  send,
 };
