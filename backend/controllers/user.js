@@ -239,6 +239,8 @@ const forgotPassword = async (req, res) => {
     : res.status(200).send({ message: "password recovered" });
 };
 
+
+
 const send = async (req, res) => {
   if (!req.body.email)
     return res.status(400).send({ message: "Incomplete data" });
