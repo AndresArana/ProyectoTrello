@@ -11,13 +11,14 @@ import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: WelcomeComponent,
     pathMatch: 'full',
   },
   {

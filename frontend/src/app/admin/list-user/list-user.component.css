@@ -4,12 +4,14 @@
   height: 100%;
   padding-bottom: 30%;
   background:url("https://previews.123rf.com/images/hdesert/hdesert1611/hdesert161100244/68522437-cuaderno-y-l%C3%A1piz-en-blanco-con-la-lista-de-tareas-sobre-un-fondo-oscuro-de-la-madera.jpg");
+  
 }
 
 .container {
   display: flex;
   flex-direction: column;
   padding: 20px 16px 0px;
+  
 }
 
 table {
@@ -30,7 +32,6 @@ th {
   background-color: #a5abaf;
   color: #ffffff;
   
-
 }
 
 .mat-icon {

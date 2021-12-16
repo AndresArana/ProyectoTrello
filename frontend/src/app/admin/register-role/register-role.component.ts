@@ -42,7 +42,7 @@ export class RegisterRoleComponent implements OnInit {
           this.registerData = {};
         },
         (err) => {
-          this.message = err.error;
+          this.message = err.error.message;
           this.openSnackBarError();
         }
       );

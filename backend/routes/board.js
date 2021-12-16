@@ -8,10 +8,10 @@ import multiparty from "connect-multiparty";
 const mult = multiparty();
 const router = express.Router();
 
-router.post("/saveTask", auth, board.saveTask);
-router.post("/saveTaskImg", mult, formatFile, auth, board.saveTaskImg);
 router.get("/listTask", auth, board.listTask);
 router.get("/findTask/:_id", auth, validId, board.findTask);
+router.get("/listTaskByIdW/:_id", auth, board.listBoardByIdWork);
+router.post("/saveTask", mult, formatFile, auth, board.saveTask);
 router.put("/updateTask", auth, board.updateTask);
 router.put("/editTask", auth, board.editTask);
 router.delete("/deleteTask/:_id", auth, validId, board.deleteTask);

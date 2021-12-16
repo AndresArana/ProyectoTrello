@@ -7,7 +7,12 @@
     position: relative;
     min-height: 90vh;
 }
-
+.imagen{
+    margin: 10px auto;
+    display: block;
+    max-width: 40%;
+    max-height: 40%;
+}
 .container {
     display: flex;
     flex-direction: column;
