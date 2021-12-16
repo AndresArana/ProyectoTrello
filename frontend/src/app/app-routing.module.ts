@@ -8,6 +8,7 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { ListTaskComponent } from './board/list-task/list-task.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
+import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 
@@ -25,10 +26,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'editTask/:_id',
+    component: EditTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  
+  {
     path: 'saveTask',
     component: SaveTaskComponent,
     canActivate: [AuthGuard],
   },
+
   {
     path: 'login',
     component: LoginComponent,

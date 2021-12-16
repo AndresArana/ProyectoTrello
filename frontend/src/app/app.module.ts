@@ -10,6 +10,7 @@ import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { ListTaskComponent } from './board/list-task/list-task.component';
+import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
@@ -40,6 +41,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     RegisterRoleComponent,
     ListRoleComponent,
     UpdateRoleComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,

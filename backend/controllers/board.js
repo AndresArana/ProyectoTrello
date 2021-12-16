@@ -67,6 +67,16 @@ const listTask = async (req, res) => {
     : res.status(200).send({ taskList });
 };
 
+const findTask = async (req, res) => {
+  const taskfind = await board
+    .findById({ _id: req.params["_id"] })
+    .populate("userId")
+    .exec();
+  return !taskfind
+    ? res.status(400).send({ message: "No search results" })
+    : res.status(200).send({ taskfind });
+};
+
 const updateTask = async (req, res) => {
   if (!req.body._id || !req.body.taskStatus)
     return res.status(400).send({ message: "Incomplete data" });
@@ -100,10 +110,10 @@ const deleteTask = async (req, res) => {
 
 const editTask = async (req, res) => {
   if (
-    !req.body._id ||
-    (!req.body.name && !req.body.description && !req.body.imageUrl)
+    !req.body._id
+      //  (!req.body.name && !req.body.description && !req.body.imageUrl)
   )
-    return res.status(400).send({ message: "Incomplete data" });
+    return res.status(400).send({ message: "Incomplete datas" });
 
   let imageUrl = "";
   if (Object.keys(req.files).length === 0) {
@@ -132,9 +142,21 @@ const editTask = async (req, res) => {
     imageUrl: imageUrl,
   });
 
+  //  const result = await taskEdit.save();
   return !taskEdit
     ? res.status(400).send({ message: "Task not found" })
     : res.status(200).send({ message: "edited task" });
+  // if (!result)
+  // return res.status(400).send({ message: "Error editing task" });
+  // return res.status(200).send({ result });
 };
 
-export default { saveTask, saveTaskImg, listTask, updateTask, deleteTask, editTask };
+export default {
+  saveTask,
+  saveTaskImg,
+  listTask,
+  findTask,
+  updateTask,
+  deleteTask,
+  editTask,
+};

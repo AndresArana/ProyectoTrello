@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../services/board.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -8,14 +8,15 @@ import {
 } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-save-task',
-  templateUrl: './save-task.component.html',
-  styleUrls: ['./save-task.component.css'],
+  selector: 'app-edit-task',
+  templateUrl: './edit-task.component.html',
+  styleUrls: ['./edit-task.component.css'],
 })
-export class SaveTaskComponent implements OnInit {
-  registerData: any;
+export class EditTaskComponent implements OnInit {
   selectedFile: any;
   message: string = '';
+  registerData: any;
+  _id: string;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   durationInSeconds: number = 2;
@@ -23,25 +24,46 @@ export class SaveTaskComponent implements OnInit {
   constructor(
     private _boardService: BoardService,
     private _router: Router,
+    private _Arouter: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {
     this.registerData = {};
+    this._id = '';
     this.selectedFile = null;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._Arouter.params.subscribe((params) => {
+      this._id = params['_id'];
+      this._boardService.findTask(this._id).subscribe(
+        (res) => {
+          this.registerData = res.taskfind;
+          console.log(this.registerData);
+        },
+        (err) => {
+          this.message = err.error;
+          this.openSnackBarError();
+        }
+      );
+    });
+  }
 
-  saveTask() {
+  uploadImg(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  editTask() {
     if (!this.registerData.name || !this.registerData.description) {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      this._boardService.saveTask(this.registerData).subscribe(
+      this._boardService.editTask(this.registerData).subscribe(
         (res) => {
           this._router.navigate(['/listTask']);
-          this.message = 'Task create';
+          this.message = 'Successfull edit Task';
           this.openSnackBarSuccesfull();
           this.registerData = {};
+          console.log(this.registerData);
         },
         (err) => {
           this.message = err.error;
@@ -51,11 +73,7 @@ export class SaveTaskComponent implements OnInit {
     }
   }
 
-  uploadImg(event: any) {
-    this.selectedFile = <File>event.target.files[0];
-  }
-
-  saveTaskImg() {
+  editTaskImg() {
     if (!this.registerData.name || !this.registerData.description) {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
@@ -68,12 +86,13 @@ export class SaveTaskComponent implements OnInit {
       data.append('name', this.registerData.name);
       data.append('description', this.registerData.description);
       console.log(data);
-      this._boardService.saveTaskImg(data).subscribe({
+      this._boardService.editTask(data).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);
           this.message = 'Task create';
           this.openSnackBarSuccesfull();
           this.registerData = {};
+          console.log(this.registerData);
         },
         error: (e) => {
           this.message = e.error.message;
@@ -82,6 +101,22 @@ export class SaveTaskComponent implements OnInit {
         complete: () => console.info('complete'),
       });
     }
+  }
+
+  findTask(){
+    this._Arouter.params.subscribe((params) => {
+      this._id = params['_id'];
+      this._boardService.findTask(this._id).subscribe(
+        (res) => {
+          console.log(this.registerData);
+        },
+        (err) => {
+          this.message = err.error;
+          this.openSnackBarError();
+        },
+      );
+
+    });
   }
 
   openSnackBarSuccesfull() {
