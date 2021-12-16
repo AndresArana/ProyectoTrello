@@ -38,4 +38,11 @@ const updateWorkB = async(req, res) => {
         res.status(200).send({ message: "Work update" });
 };
 
-export default { saveWorkB, listWorkB, updateWorkB };
+const deleteWorkB = async(req, res) => {
+    const workDelete = await workBoard.findByIdAndDelete({ _id: req.params["_id"] });
+    return !workDelete ?
+        res.status(400).send({ message: "user no found" }) :
+        res.status(200).send({ message: "Work board deleted" });
+};
+
+export default { saveWorkB, listWorkB, updateWorkB, deleteWorkB };
