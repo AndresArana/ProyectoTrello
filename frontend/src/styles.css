@@ -6,7 +6,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background:url("https://previews.123rf.com/images/hdesert/hdesert1611/hdesert161100244/68522437-cuaderno-y-l%C3%A1piz-en-blanco-con-la-lista-de-tareas-sobre-un-fondo-oscuro-de-la-madera.jpg");
+  background: url("https://previews.123rf.com/images/hdesert/hdesert1611/hdesert161100244/68522437-cuaderno-y-l%C3%A1piz-en-blanco-con-la-lista-de-tareas-sobre-un-fondo-oscuro-de-la-madera.jpg");
 }
 
 .style-snackBarTrue {
@@ -17,5 +17,3 @@ body {
   background-color: #810505;
   color: #ffffff;
 }
-
-
