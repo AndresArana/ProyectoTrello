@@ -172,7 +172,7 @@ const deleteUser = async(req, res) => {
     return !userDelete ?
         res.status(400).send({ message: "user no found" }) :
         res.status(200).send({ message: "user deleted" });
-}
+};
 
 const login = async(req, res) => {
     if (!req.body.email || !req.body.password)
