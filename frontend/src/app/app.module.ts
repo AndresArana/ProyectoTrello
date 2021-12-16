@@ -39,6 +39,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     RegisterRoleComponent,
     ListRoleComponent,
     UpdateRoleComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
