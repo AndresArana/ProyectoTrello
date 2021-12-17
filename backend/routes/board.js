@@ -7,7 +7,7 @@ import multiparty from "connect-multiparty";
 const mult = multiparty();
 const router = express.Router();
 
-router.post("/saveTask", mult, formatFile, auth, board.saveTask);
+router.post("/saveTaskImg", mult, formatFile, auth, board.saveTaskImg); // FUNCIONA CON EL ID
 router.get("/listTask", auth, board.listTask);
 router.get("/listTaskByIdW/:_id", auth, board.listBoardByIdWork);
 router.put("/updateTask", auth, board.updateTask);

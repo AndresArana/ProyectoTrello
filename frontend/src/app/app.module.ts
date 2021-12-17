@@ -42,6 +42,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { SendPasswordComponent } from './home/send-password/send-password.component';
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
+import { ListTableComponent } from './table/list-table/list-table.component';
+import { SaveTableComponent } from './table/save-table/save-table.component';
 
 @NgModule({
   declarations: [
@@ -59,8 +61,13 @@ import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.
     ListRoleComponent,
     UpdateRoleComponent,
     WelcomeComponent,
+<<<<<<< HEAD
     SendPasswordComponent,
     ForgotPasswordComponent,
+=======
+    ListTableComponent,
+    SaveTableComponent,
+>>>>>>> cf92f972a95439d166397e2104a9989c5de92e95
   ],
   imports: [
     BrowserModule,
