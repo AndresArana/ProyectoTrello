@@ -40,6 +40,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { SendPasswordComponent } from './home/send-password/send-password.component';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
     ListRoleComponent,
     UpdateRoleComponent,
     WelcomeComponent,
+    SendPasswordComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
