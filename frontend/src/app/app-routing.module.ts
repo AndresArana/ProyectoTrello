@@ -11,7 +11,9 @@ import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
-import { SendPasswordComponent } from "./home/send-password/send-password.component";
+import { ListTableComponent } from './table/list-table/list-table.component';
+import { SaveTableComponent } from './table/save-table/save-table.component';
+import { SendPasswordComponent } from './home/send-password/send-password.component';
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 
 import { AuthGuard } from './guard/auth.guard';
@@ -28,8 +30,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'listWorkB',
+    component: ListTableComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'saveTask',
     component: SaveTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'saveWorkB',
+    component: SaveTableComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -71,14 +83,14 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path:'sendPassword',
-    component: SendPasswordComponent
+    path: 'sendPassword',
+    component: SendPasswordComponent,
   },
   {
-    path:'forgotPassword/:_id',
+    path: 'forgotPassword/:_id',
     component: ForgotPasswordComponent,
     canActivate: [AuthGuard],
-  }
+  },
 ];
 
 @NgModule({
