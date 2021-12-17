@@ -73,51 +73,51 @@ export class EditTaskComponent implements OnInit {
     }
   }
 
-  editTaskImg() {
-    if (!this.registerData.name || !this.registerData.description) {
-      this.message = 'Failed process: Imcomplete data';
-      this.openSnackBarError();
-    } else {
-      const data = new FormData();
+  // editTaskImg() {
+  //   if (!this.registerData.name || !this.registerData.description) {
+  //     this.message = 'Failed process: Imcomplete data';
+  //     this.openSnackBarError();
+  //   } else {
+  //     const data = new FormData();
 
-      if (this.selectedFile != null) {
-        data.append('image', this.selectedFile, this.selectedFile.name);
-      }
-      data.append('name', this.registerData.name);
-      data.append('description', this.registerData.description);
-      console.log(data)
-      this._boardService.editTask(data).subscribe({
-        next: (v) => {
-          this._router.navigate(['/listTask']);
-          this.message = 'Task create';
-          this.openSnackBarSuccesfull();
-          this.registerData = {};
-          console.log(this.registerData);
-        },
-        error: (e) => {
-          this.message = e.error.message;
-          this.openSnackBarError();
-        },
-        complete: () => console.info('complete'),
-      });
-    }
-  }
+  //     if (this.selectedFile != null) {
+  //       data.append('image', this.selectedFile, this.selectedFile.name);
+  //     }
+  //     data.append('name', this.registerData.name);
+  //     data.append('description', this.registerData.description);
+  //     console.log(data)
+  //     this._boardService.editTask(data).subscribe({
+  //       next: (v) => {
+  //         this._router.navigate(['/listTask']);
+  //         this.message = 'Successfull edit Task';
+  //         this.openSnackBarSuccesfull();
+  //         this.registerData = {};
+  //         console.log(this.registerData);
+  //       },
+  //       error: (e) => {
+  //         this.message = e.error.message;
+  //         this.openSnackBarError();
+  //       },
+  //       complete: () => console.info('complete'),
+  //     });
+  //   }
+  // }
 
-  findTask(){
-    this._Arouter.params.subscribe((params) => {
-      this._id = params['_id'];
-      this._boardService.findTask(this._id).subscribe(
-        (res) => {
-          console.log(this.registerData);
-        },
-        (err) => {
-          this.message = err.error;
-          this.openSnackBarError();
-        },
-      );
+  // findTask(){
+  //   this._Arouter.params.subscribe((params) => {
+  //     this._id = params['_id'];
+  //     this._boardService.findTask(this._id).subscribe(
+  //       (res) => {
+  //         console.log(this.registerData);
+  //       },
+  //       (err) => {
+  //         this.message = err.error;
+  //         this.openSnackBarError();
+  //       },
+  //     );
 
-    });
-  }
+  //   });
+  // }
 
   openSnackBarSuccesfull() {
     this._snackBar.open(this.message, 'X', {

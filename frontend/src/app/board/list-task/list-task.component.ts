@@ -39,7 +39,9 @@ export class ListTaskComponent implements OnInit {
   ngOnInit(): void {
     this._boardService.listTask().subscribe({
       next: (v) => {
-        
+        //this.findTask()
+        var output = document.getElementById('edit')
+        //output?.innerHTML = this.taskData;
         this.taskData = v.taskList;
         this.taskData.forEach((tk: any) => {
           if (tk.taskStatus === 'to-do') {
@@ -48,12 +50,12 @@ export class ListTaskComponent implements OnInit {
           }
           if (tk.taskStatus === 'in-progress') {
             this.taskInprogress.push(tk);
+            console.log(tk);
           }
           if (tk.taskStatus === 'done') {
             this.taskDone.push(tk);
+            console.log(tk);
           }
-          console.log(this.taskData);
-          
         });
       },
       error: (e) => {
@@ -102,9 +104,27 @@ export class ListTaskComponent implements OnInit {
         this.message = e.error.message;
         this.openSnackBarError();
       },
-      complete: () => console.info('complete'),
+      complete: () => console.info(task),
     });
   }
+
+  // updateTask(task: any, status: string) {
+  //   let tempStatus = task.taskStatus;
+  //   task.taskStatus = status;
+  //   this._boardService.updateTask(task).subscribe({
+  //     next: (v) => {
+  //       task.status = status;
+  //       this.resetList();
+  //     },
+  //     error: (e) => {
+  //       task.status = tempStatus;
+  //       this.message = e.error.message;
+  //       this.openSnackBarError();
+  //     },
+  //     complete: () => console.info('complete'),
+  //   });
+  // }
+
 
   resetList() {
     this.taskTodo = [];
@@ -157,9 +177,8 @@ export class ListTaskComponent implements OnInit {
       let index = this.taskData.indexOf(task);
       this.taskData.forEach((tk: any) => {
         if (tk.taskStatus === 'to-do') {
-          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          this.taskTodo.findIndex( tk._id ===this._boardService.findTask(tk._id));
           console.log(index);
-          
           return index
         }
         if (tk.taskStatus === 'in-progress') {
