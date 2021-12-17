@@ -13,7 +13,7 @@ router.get("/findTask/:_id", auth, validId, board.findTask);
 router.get("/listTaskByIdW/:_id", auth, board.listBoardByIdWork);
 router.post("/saveTask", mult, formatFile, auth, board.saveTask);
 router.put("/updateTask", auth, board.updateTask);
-router.put("/editTask", auth, board.editTask);
+router.put("/editTask", mult, formatFile, auth, board.editTask);
 router.delete("/deleteTask/:_id", auth, validId, board.deleteTask);
 
 

@@ -39,10 +39,12 @@ export class ListTaskComponent implements OnInit {
   ngOnInit(): void {
     this._boardService.listTask().subscribe({
       next: (v) => {
+        
         this.taskData = v.taskList;
         this.taskData.forEach((tk: any) => {
           if (tk.taskStatus === 'to-do') {
             this.taskTodo.push(tk);
+            console.log(tk);
           }
           if (tk.taskStatus === 'in-progress') {
             this.taskInprogress.push(tk);
@@ -50,6 +52,8 @@ export class ListTaskComponent implements OnInit {
           if (tk.taskStatus === 'done') {
             this.taskDone.push(tk);
           }
+          console.log(this.taskData);
+          
         });
       },
       error: (e) => {
@@ -78,6 +82,12 @@ export class ListTaskComponent implements OnInit {
       this.dropUpdate();
     }
   }
+
+  // findIndex(){
+  //   let indice = this.taskTodo.findIndex(this._boardService.findTask = this._id);
+  //   return indice = 
+  // }
+
 
   updateTask(task: any, status: string) {
     let tempStatus = task.taskStatus;
@@ -139,6 +149,37 @@ export class ListTaskComponent implements OnInit {
         this.updateTask(tk, 'done');
       }
     });
+  }
+
+  findTask(task: any){
+   this._boardService.findTask(task).subscribe({
+     next: (v) =>{
+      let index = this.taskData.indexOf(task);
+      this.taskData.forEach((tk: any) => {
+        if (tk.taskStatus === 'to-do') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          console.log(index);
+          
+          return index
+        }
+        if (tk.taskStatus === 'in-progress') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          console.log(index);
+          return index
+        }
+        if (tk.taskStatus === 'done') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          console.log(index);
+          return index
+        }
+      });
+     },
+     error: (e) => {
+      this.message = e.error.message;
+      this.openSnackBarError();
+    },
+    complete: () => console.info('complete'),
+   })
   }
 
   deleteTask(task: any) {

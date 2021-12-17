@@ -85,7 +85,7 @@ export class EditTaskComponent implements OnInit {
       }
       data.append('name', this.registerData.name);
       data.append('description', this.registerData.description);
-      console.log(data);
+      console.log(data)
       this._boardService.editTask(data).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);
