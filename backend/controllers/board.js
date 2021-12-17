@@ -59,8 +59,8 @@ const saveTask = async(req, res) => {
     if (!req.body.name || !req.body.description)
         return res.status(400).send({ message: "Incomplete data" });
 
-    const workFind = await workBoard.findById({ _id: req.params["_id"] });
-    if (!workFind) res.status(400).send({ message: "work not found" });
+    // const workFind = await workBoard.findById({ _id: req.params["_id"] });
+    // if (!workFind) res.status(400).send({ message: "work not found" });
 
     let imageUrl = "";
     if (Object.keys(req.files).length === 0) {
@@ -83,7 +83,7 @@ const saveTask = async(req, res) => {
         }
 
         const boardSchema = new board({
-            workBoardId: workFind._id,
+            // workBoardId: workFind._id,
             userId: req.user._id,
             name: req.body.name,
             description: req.body.description,
