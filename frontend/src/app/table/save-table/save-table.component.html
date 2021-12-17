@@ -1,1 +1,32 @@
-<p>save-table works!</p>
+<div class="bgComponent">
+  <div class="form">
+    <mat-card class="card">
+      <img class="imagen" src="../../../assets/tarea.jpg" />
+      <mat-card-title>Create Table</mat-card-title>
+      <mat-card-content>
+        <div class="container">
+          <mat-form-field>
+            <input
+              [(ngModel)]="registerData.name"
+              matInput
+              placeholder="Table name"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              [(ngModel)]="registerData.description"
+              matInput
+              placeholder="Description"
+            />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="saveWorkB()" class="button" mat-raised-button>
+          Create
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

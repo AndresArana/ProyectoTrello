@@ -11,6 +11,8 @@ import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { ListTableComponent } from './table/list-table/list-table.component';
+import { SaveTableComponent } from './table/save-table/save-table.component';
 
 import { AuthGuard } from './guard/auth.guard';
 
@@ -26,8 +28,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'listWorkB',
+    component: ListTableComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'saveTask',
     component: SaveTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'saveWorkB',
+    component: SaveTableComponent,
     canActivate: [AuthGuard],
   },
   {
