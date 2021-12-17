@@ -1,42 +1,40 @@
 <div class="bgComponent">
-    <div class="form">
-      <mat-card class="card">
-        <img class="imagen" src="../../../assets/image001.png">
-        <mat-card-title>User Login</mat-card-title>
-        <mat-card-content>
-          <div class="container">
-            <mat-form-field>
-              <input
-                [(ngModel)]="loginData.email"
-                type="email"
-                matInput
-                placeholder="Email"
-                required
-              />
-            </mat-form-field>
-            <mat-form-field>
-              <input
-                [(ngModel)]="loginData.password"
-                type="password"
-                matInput
-                placeholder="Password"
-                required
-              />
-            </mat-form-field>
-          </div>
-        </mat-card-content>
-        <a class="hiper" href="">forgot password</a>
-        <br />
-        <br>
-        <mat-card-actions>
-          <button (click)="login()" class="button" mat-raised-button>
-            Go!!
-          </button>
-        </mat-card-actions>
-        <mat-card-actions>
-          <button (click)="login()" class="button2" mat-raised-button>Google Login</button>
-        </mat-card-actions>
-        <a class="hiper" href="">forgot password</a>
-      </mat-card>
-    </div>
+  <div class="form">
+    <mat-card class="card">
+      <img class="imagen" src="../../../assets/image001.png" />
+      <mat-card-title>User Login</mat-card-title>
+      <mat-card-content>
+        <div class="container">
+          <mat-form-field>
+            <input
+              [(ngModel)]="loginData.email"
+              type="email"
+              matInput
+              placeholder="Email"
+              required
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              [(ngModel)]="loginData.password"
+              type="password"
+              matInput
+              placeholder="Password"
+              required
+            />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button (click)="login()" class="button" mat-raised-button>Go!!</button>
+      </mat-card-actions>
+      <mat-card-actions>
+        <button (click)="login()" class="button2" mat-raised-button>
+          Google Login
+        </button>
+      </mat-card-actions>
+      <a class="hiper" href="/sendPassword/">forgot password</a>
+    </mat-card>
+  </div>
 </div>

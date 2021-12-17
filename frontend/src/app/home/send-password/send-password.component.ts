@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TableService } from 'src/app/services/table.service';
+import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import {
   MatSnackBar,
@@ -8,43 +8,43 @@ import {
 } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-save-table',
-  templateUrl: './save-table.component.html',
-  styleUrls: ['./save-table.component.css'],
+  selector: 'app-send-password',
+  templateUrl: './send-password.component.html',
+  styleUrls: ['./send-password.component.css'],
 })
-export class SaveTableComponent implements OnInit {
-  registerData: any;
+export class SendPasswordComponent implements OnInit {
+  sendPasswordData: any;
   message: string = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   durationInSeconds: number = 2;
+
   constructor(
-    private _tableService: TableService,
+    private _userService: UserService,
     private _router: Router,
     private _snackBar: MatSnackBar
   ) {
-    this.registerData = {};
+    this.sendPasswordData = {};
   }
 
   ngOnInit(): void {}
-  saveWorkB() {
-    if (!this.registerData.name || !this.registerData.description) {
-      this.message = 'Failed process: Incomplete data';
+
+  sendPassword() {
+    if (!this.sendPasswordData.email) {
+      this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      // const data = new FormData();
-      // data.append('name', this.registerData.name);
-      // data.append('description', this.registerData.description);
-
-      this._tableService.saveWorkB(this.registerData).subscribe({
+      this._userService.sendPassword(this.sendPasswordData).subscribe({
         next: (v) => {
-          this._router.navigate(['/listTable']);
-          this.message = 'Table created';
+          localStorage.setItem('token', v.token);
+          this._router.navigate(['/login']);
+          this.message = 'Succefull send mail';
           this.openSnackBarSuccesfull();
-          this.registerData = {};
+          this.sendPasswordData = {};
         },
         error: (e) => {
           this.message = e.error.message;
+          this.message = 'error send mail';
           this.openSnackBarError();
         },
         complete: () => console.info('complete'),
@@ -60,7 +60,6 @@ export class SaveTableComponent implements OnInit {
       panelClass: ['style-snackBarTrue'],
     });
   }
-
   openSnackBarError() {
     this._snackBar.open(this.message, 'X', {
       horizontalPosition: this.horizontalPosition,

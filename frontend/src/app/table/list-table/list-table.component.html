@@ -1,1 +1,33 @@
-<p>list-table works!</p>
+<div class="container">
+  <div class="accordion_display">
+    <div class="accordion_size">
+      <mat-accordion multi="true" *ngIf="tableData.length">
+        <mat-expansion-panel *ngFor="let table of tableData" hideToggle="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <span>{{ table.name }}</span>
+              <span class="spacer"></span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-panel-description>
+            {{ table.description }}
+          </mat-panel-description>
+          <mat-action-row>
+            <button
+              [routerLink]="['/saveTask', tableData[0]._id]"
+              class="tarea"
+            >
+              Crear tarea
+            </button>
+
+            <mat-icon>group_add</mat-icon>
+            <!-- <mat-icon color="primary" (click)="deleteTask(item)"
+                      >delete</mat-icon
+                    > -->
+            <span class="spacer"></span>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

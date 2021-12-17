@@ -12,6 +12,10 @@ import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { ListTableComponent } from './table/list-table/list-table.component';
+import { SaveTableComponent } from './table/save-table/save-table.component';
+import { SendPasswordComponent } from './home/send-password/send-password.component';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 
 import { AuthGuard } from './guard/auth.guard';
 
@@ -31,13 +35,22 @@ const routes: Routes = [
     component: EditTaskComponent,
     canActivate: [AuthGuard],
   },
-  
+  {
+    path: 'listWorkB',
+    component: ListTableComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'saveTask',
     component: SaveTaskComponent,
     canActivate: [AuthGuard],
   },
 
+  {
+    path: 'saveWorkB',
+    component: SaveTableComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -74,6 +87,15 @@ const routes: Routes = [
   {
     path: 'updateRole/:_id',
     component: UpdateRoleComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'sendPassword',
+    component: SendPasswordComponent,
+  },
+  {
+    path: 'forgotPassword/:_id',
+    component: ForgotPasswordComponent,
     canActivate: [AuthGuard],
   },
 ];

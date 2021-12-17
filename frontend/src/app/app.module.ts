@@ -41,6 +41,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { WelcomeComponent } from './home/welcome/welcome.component';
+import { SendPasswordComponent } from './home/send-password/send-password.component';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 import { ListTableComponent } from './table/list-table/list-table.component';
 import { SaveTableComponent } from './table/save-table/save-table.component';
 
@@ -62,6 +64,8 @@ import { SaveTableComponent } from './table/save-table/save-table.component';
     UpdateRoleComponent,
     EditTaskComponent,
     WelcomeComponent,
+    SendPasswordComponent,
+    ForgotPasswordComponent,
     ListTableComponent,
     SaveTableComponent,
   ],
