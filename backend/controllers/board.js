@@ -4,34 +4,12 @@ import fs from "fs";
 import path from "path";
 import moment from "moment";
 
-const saveTaskWork = async(req, res) => {
-    if (!req.body.name || !req.body.description)
-        return res.status(400).send({ message: "Incomplete data" });
-
-    const workFind = await workBoard.findById({ _id: req.params["_id"] });
-    if (!workFind) res.status(400).send({ message: "work not found" });
-
-    const boardSchema = new board({
-        workBoardId: workFind._id,
-        userId: req.user._id,
-        name: req.body.name,
-        description: req.body.description,
-        taskStatus: "to-do",
-        imageUrl: "",
-    });
-
-    const result = await boardSchema.save();
-    return !result ?
-        res.status(400).send({ message: "Error registering task" }) :
-        res.status(200).send({ result });
-};
-
 const saveTaskImg = async(req, res) => {
     if (!req.body.name || !req.body.description)
         return res.status(400).send({ message: "Incomplete data" });
 
-    const workFind = await workBoard.findById({ _id: req.params["_id"] });
-    if (!workFind) res.status(400).send({ message: "work not found" });
+    // const workFind = await workBoard.findById({ _id: req.params["_id"] });
+    // if (!workFind) res.status(400).send({ message: "work not found" });
 
     let imageUrl = "";
     if (Object.keys(req.files).length === 0) {
@@ -53,7 +31,22 @@ const saveTaskImg = async(req, res) => {
             }
         }
     }
+
+    const boardSchema = new board({
+        // workBoardId: workFind._id,
+        userId: req.user._id,
+        name: req.body.name,
+        description: req.body.description,
+        taskStatus: "to-do",
+        imageUrl: imageUrl,
+    });
+
+    const result = await boardSchema.save();
+    if (!result)
+        return res.status(400).send({ message: "Error registering task" });
+    return res.status(200).send({ result });
 };
+
 
 const saveTask = async(req, res) => {
     if (!req.body.name || !req.body.description)
@@ -144,6 +137,12 @@ const deleteTask = async(req, res) => {
     } catch (e) {
         console.log("Image no found in server");
     }
+
+    // const taskDelete = await board.findByIdAndDelete({ _id: req.params["_id"] });
+    // return !taskDelete ?
+    //     res.status(400).send({ message: "Task no found" }) :
+    //     res.status(200).send({ message: "Task deleted" });
+
 };
 
 const editTask = async(req, res) => {
@@ -187,10 +186,8 @@ const editTask = async(req, res) => {
 export default {
     saveTaskImg,
     listTask,
-    saveTaskWork,
     updateTask,
     deleteTask,
     editTask,
     listBoardByIdWork,
-    saveTask,
 };

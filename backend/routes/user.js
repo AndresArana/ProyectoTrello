@@ -12,8 +12,9 @@ router.get("/listUsers/:name?", auth, admin, user.listAllUser);
 router.get("/getRole/:email", auth, user.getUserRole);
 router.get("/findUser/:_id", auth, validId, admin, user.findUser);
 router.put("/updateUser", auth, admin, user.updateUser);
-router.put("/forgotPassword", auth, user.forgotPassword);
-router.post("/send", user.send);
-router.delete("/deleteUser/:_id", auth,validId, admin, user.deleteUser);
+router.put("/forgotPassword",auth, user.forgotPassword);
+router.post("/sendPassword", user.sendPassword);
+router.delete("/deleteUser/:_id", auth,validId , admin, user.deleteUser);
+router.get("/findUserPass/:_id", auth, validId, user.findUserPass);
 
 export default router;

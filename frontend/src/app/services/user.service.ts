@@ -38,7 +38,7 @@ export class UserService {
   }
 
   deleteUser(user: any) {
-    return this._http.delete<any>(this.env + 'user/deleteUser/'+ user._id);
+    return this._http.delete<any>(this.env + 'user/deleteUser/' + user._id);
   }
 
   registerAdmin(user: any) {
@@ -62,4 +62,17 @@ export class UserService {
     localStorage.removeItem('role');
     this._router.navigate(['/login']);
   }
+
+  sendPassword(user: any) {
+    return this._http.post<any>(this.env + 'user/sendPassword', user);
+  }
+
+  forgotPassword(user: any) {
+    return this._http.put<any>(this.env + 'user/forgotPassword/', user);
+  }
+
+  findUserPass(_id: string) {
+    return this._http.get<any>(this.env + 'user/findUserPass/' + _id);
+  }
+
 }

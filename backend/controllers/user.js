@@ -237,7 +237,7 @@ const forgotPassword = async(req, res) => {
         res.status(200).send({ message: "password recovered" });
 };
 
-const send = async(req, res) => {
+const sendPassword = async(req, res) => {
     if (!req.body.email)
         return res.status(400).send({ message: "Incomplete data" });
 
@@ -256,7 +256,7 @@ const send = async(req, res) => {
                 expiresIn: "10m",
             }
         );
-        let verificationLink = "http://localhost:3001/api/user/forgotPassword";
+        let verificationLink = "http://localhost:4200/forgotPassword/" + searchUser._id;
         const info = await transporter.sendMail({
             from: '"Debbel 👻" <joya1028@gmail.com>',
             to: searchUser.email,
@@ -277,6 +277,16 @@ const send = async(req, res) => {
     }
 };
 
+const findUserPass = async(req, res) => {
+    const userfind = await user
+        .findById({ _id: req.params["_id"] })
+        .populate("roleId")
+        .exec();
+    return !userfind ?
+        res.status(400).send({ message: "No search results" }) :
+        res.status(200).send({ userfind });
+};
+
 export default {
     registerUser,
     registerAdminUser,
@@ -288,5 +298,6 @@ export default {
     login,
     getUserRole,
     forgotPassword,
-    send,
+    sendPassword,
+    findUserPass,
 };
