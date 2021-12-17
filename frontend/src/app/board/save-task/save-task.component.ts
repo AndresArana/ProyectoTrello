@@ -31,26 +31,6 @@ export class SaveTaskComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  saveTask() {
-    if (!this.registerData.name || !this.registerData.description) {
-      this.message = 'Failed process: Imcomplete data';
-      this.openSnackBarError();
-    } else {
-      this._boardService.saveTask(this.registerData).subscribe(
-        (res) => {
-          this._router.navigate(['/listTask']);
-          this.message = 'Task create';
-          this.openSnackBarSuccesfull();
-          this.registerData = {};
-        },
-        (err) => {
-          this.message = err.error;
-          this.openSnackBarError();
-        }
-      );
-    }
-  }
-
   uploadImg(event: any) {
     this.selectedFile = <File>event.target.files[0];
   }
@@ -61,7 +41,6 @@ export class SaveTaskComponent implements OnInit {
       this.openSnackBarError();
     } else {
       const data = new FormData();
-
       if (this.selectedFile != null) {
         data.append('image', this.selectedFile, this.selectedFile.name);
       }

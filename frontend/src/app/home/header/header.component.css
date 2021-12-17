@@ -1,8 +1,9 @@
 .headerSpacer {
   flex: 1 1 auto;
-  
 }
-
+.icono {
+  margin: 0 30%;
+}
 a {
   text-decoration: none;
   color: white;
@@ -23,11 +24,11 @@ mat-form-field {
   padding: 6px;
 }
 
-.dropdown-item{
+.dropdown-item {
   background-color: #383d38;
 }
 
-
-a:hover, a:active{
+a:hover,
+a:active {
   color: lightgray;
 }
