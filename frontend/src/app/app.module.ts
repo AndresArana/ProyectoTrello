@@ -61,13 +61,10 @@ import { SaveTableComponent } from './table/save-table/save-table.component';
     ListRoleComponent,
     UpdateRoleComponent,
     WelcomeComponent,
-<<<<<<< HEAD
     SendPasswordComponent,
     ForgotPasswordComponent,
-=======
     ListTableComponent,
     SaveTableComponent,
->>>>>>> cf92f972a95439d166397e2104a9989c5de92e95
   ],
   imports: [
     BrowserModule,
