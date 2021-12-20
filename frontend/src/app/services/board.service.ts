@@ -24,6 +24,10 @@ export class BoardService {
     return this._http.get<any>(this.env + 'board/listTask');
   }
 
+  listTaskId(_id: string){
+    return this._http.get<any>(this.env + 'board/listTaskByIdW/' + _id);
+  }
+
   updateTask(board: any) {
     return this._http.put<any>(this.env + 'board/updateTask', board);
   }

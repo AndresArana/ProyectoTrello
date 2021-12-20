@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../services/board.service';
+import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -17,6 +18,7 @@ import {
   styleUrls: ['./list-task.component.css'],
 })
 export class ListTaskComponent implements OnInit {
+  _id: string;
   taskData: any;
   taskTodo: any;
   taskInprogress: any;
@@ -28,8 +30,10 @@ export class ListTaskComponent implements OnInit {
 
   constructor(
     private _boardService: BoardService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _Arouter: ActivatedRoute,
   ) {
+    this._id='';
     this.taskData = {};
     this.taskTodo = [];
     this.taskInprogress = [];
@@ -37,27 +41,30 @@ export class ListTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._boardService.listTask().subscribe({
-      next: (v) => {
-        this.taskData = v.taskList;
-        this.taskData.forEach((tk: any) => {
-          if (tk.taskStatus === 'to-do') {
-            this.taskTodo.push(tk);
-          }
-          if (tk.taskStatus === 'in-progress') {
-            this.taskInprogress.push(tk);
-          }
-          if (tk.taskStatus === 'done') {
-            this.taskDone.push(tk);
-          }
-        });
-      },
-      error: (e) => {
-        this.message = e.error.message;
-        this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
-    });
+    this._Arouter.params.subscribe((params) => {
+      this._id = params['_id'];
+      this._boardService.listTaskId(this._id).subscribe({
+        next: (v) => {
+          this.taskData = v.boardList;
+          this.taskData.forEach((tk: any) => {
+            if (tk.taskStatus === 'to-do') {
+              this.taskTodo.push(tk);
+            }
+            if (tk.taskStatus === 'in-progress') {
+              this.taskInprogress.push(tk);
+            }
+            if (tk.taskStatus === 'done') {
+              this.taskDone.push(tk);
+            }
+          });
+        },
+        error: (e) => {
+          this.message = e.error.message;
+          this.openSnackBarError();
+        },
+        complete: () => console.info('complete'),
+      });
+    })
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -85,7 +92,7 @@ export class ListTaskComponent implements OnInit {
     this._boardService.updateTask(task).subscribe({
       next: (v) => {
         task.status = status;
-        this.resetList();
+        // this.resetList();
       },
       error: (e) => {
         task.status = tempStatus;

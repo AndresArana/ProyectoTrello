@@ -25,7 +25,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'listTask',
+    path: 'listTask/:_id',
     component: ListTaskComponent,
     canActivate: [AuthGuard],
   },
