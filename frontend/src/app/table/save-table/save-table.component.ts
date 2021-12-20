@@ -38,7 +38,7 @@ export class SaveTableComponent implements OnInit {
 
       this._tableService.saveWorkB(this.registerData).subscribe({
         next: (v) => {
-          this._router.navigate(['/listTable']);
+          this._router.navigate(['/listWorkB']);
           this.message = 'Table created';
           this.openSnackBarSuccesfull();
           this.registerData = {};
