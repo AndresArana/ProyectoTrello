@@ -57,18 +57,27 @@ export class EditTaskComponent implements OnInit {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      this._boardService.editTask(this.registerData).subscribe(
-        (res) => {
+      const data = new FormData();
+      if (this.selectedFile != null) {
+        data.append('image', this.selectedFile, this.selectedFile.name);
+      }
+      data.append('name', this.registerData.name);
+      data.append('description', this.registerData.description);
+      console.log(data)
+      this._boardService.editTask(data).subscribe({
+        next: (v) => {
           this._router.navigate(['/listTask']);
           this.message = 'Successfull edit Task';
           this.openSnackBarSuccesfull();
           this.registerData = {};
           console.log(this.registerData);
         },
-        (err) => {
-          this.message = err.error;
+        error: (e) => {
+          this.message = e.error.message;
           this.openSnackBarError();
-        }
+        },
+        complete: () => console.info('complete'),
+      }
       );
     }
   }
@@ -79,7 +88,6 @@ export class EditTaskComponent implements OnInit {
       this.openSnackBarError();
     } else {
       const data = new FormData();
-
       if (this.selectedFile != null) {
         data.append('image', this.selectedFile, this.selectedFile.name);
       }

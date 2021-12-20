@@ -111,11 +111,11 @@ const findTask = async (req, res) => {
 };
 
 const editTaskImg = async (req, res) => {
-  // if (
-  //   !req.body._id ||
-  //   (!req.body.name && !req.body.description && !req.body.imageUrl)
-  // )
-  //   return res.status(400).send({ message: "No entro" });
+  if (
+    !req.body._id ||
+    (!req.body.name && !req.body.description && !req.body.imageUrl)
+  )
+    return res.status(400).send({ message: "No entro" });
 
   let imageUrl = "";
   if (Object.keys(req.files).length === 0) {
@@ -156,9 +156,31 @@ const editTask = async (req, res) => {
   )
     return res.status(400).send({ message: "Incomplete data" });
 
+    // let imageUrl = "";
+    // if (Object.keys(req.files).length === 0) {
+    //   imageUrl = "";
+    // } else {
+    //   if (req.files.image) {
+    //     if (req.files.image.type != null) {
+    //       const url = req.protocol + "://" + req.get("host") + "/";
+    //       const serverImg =
+    //         "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+    //       fs.createReadStream(req.files.image.path).pipe(
+    //         fs.createWriteStream(serverImg)
+    //       );
+    //       imageUrl =
+    //         url +
+    //         "uploads/" +
+    //         moment().unix() +
+    //         path.extname(req.files.image.path);
+    //     }
+    //   }
+    // }
+
   const taskEdit = await board.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
     description: req.body.description,
+    imageUrl: imageUrl,
   });
 
   return !taskEdit
