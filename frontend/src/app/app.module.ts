@@ -10,6 +10,7 @@ import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { ListTaskComponent } from './board/list-task/list-task.component';
+import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
@@ -45,6 +46,7 @@ import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.
 import { ListTableComponent } from './table/list-table/list-table.component';
 import { SaveTableComponent } from './table/save-table/save-table.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +62,7 @@ import { SaveTableComponent } from './table/save-table/save-table.component';
     RegisterRoleComponent,
     ListRoleComponent,
     UpdateRoleComponent,
+    EditTaskComponent,
     WelcomeComponent,
     SendPasswordComponent,
     ForgotPasswordComponent,
