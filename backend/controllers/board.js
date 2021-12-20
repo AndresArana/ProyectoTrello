@@ -8,8 +8,8 @@ const saveTaskImg = async (req, res) => {
   if (!req.body.name || !req.body.description)
     return res.status(400).send({ message: "Incomplete data" });
 
-  // const workFind = await workBoard.findById({ _id: req.params["_id"] });
-  // if (!workFind) res.status(400).send({ message: "work not found" });
+  const workFind = await workBoard.findById({ _id: req.params["_id"] });
+  if (!workFind) res.status(400).send({ message: "work not found" });
 
   let imageUrl = "";
   if (Object.keys(req.files).length === 0) {
@@ -33,7 +33,7 @@ const saveTaskImg = async (req, res) => {
   }
 
   const boardSchema = new board({
-    // workBoardId: workFind._id,
+    workBoardId: workFind._id,
     userId: req.user._id,
     name: req.body.name,
     description: req.body.description,
@@ -139,6 +139,28 @@ const editTask = async (req, res) => {
     : res.status(200).send({ message: "edited task" });
 };
 
+const saveTaskWork = async (req, res) => {
+  if (!req.body.name || !req.body.description)
+    return res.status(400).send({ message: "Incomplete data" });
+
+  const workFind = await workBoard.findById({ _id: req.params["_id"] });
+  if (!workFind) res.status(400).send({ message: "work not found" });
+
+  const boardSchema = new board({
+    workBoardId: workFind._id,
+    userId: req.user._id,
+    name: req.body.name,
+    description: req.body.description,
+    taskStatus: "to-do",
+    imageUrl: "",
+  });
+
+  const result = await boardSchema.save();
+  if (!result)
+    return res.status(400).send({ message: "Error registering task" });
+  return res.status(200).send({ result });
+};
+
 export default {
   saveTaskImg,
   listTask,
@@ -146,4 +168,5 @@ export default {
   deleteTask,
   editTask,
   listBoardByIdWork,
+  saveTaskWork,
 };

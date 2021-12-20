@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this._userService.login(this.loginData).subscribe({
         next: (v) => {
           localStorage.setItem('token', v.token);
-          this._router.navigate(['/listTask']);
+          this._router.navigate(['/listTable']);
           this.getRole(this.loginData.email);
           this.loginData = {};
         },

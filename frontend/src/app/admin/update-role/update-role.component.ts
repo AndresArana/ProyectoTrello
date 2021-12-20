@@ -39,13 +39,13 @@ export class UpdateRoleComponent implements OnInit {
       this._id = params['_id'];
       this._roleService.findRole(this._id).subscribe({
         next: (v) => {
-          this.registerData = v.roleId
+          this.registerData = v.roleId;
           console.log(this.registerData);
         },
         error: (e) => {
           this.message = e.error;
           this.openSnackBarError();
-        }
+        },
       });
     });
   }

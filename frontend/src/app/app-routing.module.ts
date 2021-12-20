@@ -25,7 +25,7 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'listTask',
+    path: 'listTask/:_id',
     component: ListTaskComponent,
     canActivate: [AuthGuard],
   },
@@ -35,7 +35,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'saveTask',
+    path: 'saveTask/:_id',
     component: SaveTaskComponent,
     canActivate: [AuthGuard],
   },

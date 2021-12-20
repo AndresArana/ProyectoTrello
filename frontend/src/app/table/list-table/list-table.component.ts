@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from 'src/app/services/table.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -18,6 +20,8 @@ import {
 })
 export class ListTableComponent implements OnInit {
   tableData: any;
+  _id: string;
+  registerData: any;
   // tableTodo: any;
   // tableInprogress: any;
   // taskDone: any;
@@ -27,9 +31,13 @@ export class ListTableComponent implements OnInit {
   durationInSeconds: number = 2;
   constructor(
     private _tableService: TableService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _router: Router,
+    private _Arouter: ActivatedRoute
   ) {
+    this._id = '';
     this.tableData = {};
+    this.registerData = {};
     // this.tableTodo = [];
     // this.tableInprogress = [];
     // this.tableDone = [];
@@ -39,7 +47,6 @@ export class ListTableComponent implements OnInit {
     this._tableService.listWorkB().subscribe({
       next: (v) => {
         this.tableData = v.workList;
-        console.log(this.tableData);
       },
       error: (e) => {
         this.message = e.error.message;
@@ -48,6 +55,25 @@ export class ListTableComponent implements OnInit {
       complete: () => console.info('complete'),
     });
   }
+
+  // deleteWorkB(table: any) {
+  //   this._tableService.deleteWorkB(table).subscribe({
+  //     next: (v) => {
+  //       let index = this.tableData.indexOf(table);
+  //       if (index > -1) {
+  //         this.tableData.splice(index, 1);
+
+  //         this.message = v.message;
+  //         this.openSnackBarSuccesfull();
+  //       }
+  //     },
+  //     error: (e) => {
+  //       this.message = e.error.message;
+  //       this.openSnackBarError();
+  //     },
+  //     complete: () => console.info('complete'),
+  //   });
+  // }
 
   openSnackBarSuccesfull() {
     this._snackBar.open(this.message, 'X', {

@@ -47,7 +47,7 @@ export class SaveTaskComponent implements OnInit {
       data.append('name', this.registerData.name);
       data.append('description', this.registerData.description);
 
-      this._boardService.saveTaskImg(data).subscribe({
+      this._boardService.saveTask(data).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);
           this.message = 'Task create';
