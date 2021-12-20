@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bgHeader">
+<nav class="navbar navbar-expand-lg bgHeader" *ngIf="_userService.loggedIn()">
   <a class="navbar-brand" href="/listTask/"
     ><img class="icono" src="../../../assets/icono.png" width="26" height="26"
   /></a>

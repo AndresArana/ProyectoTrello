@@ -40,7 +40,7 @@ export class SendPasswordComponent implements OnInit {
           this._router.navigate(['/login']);
           this.message = 'Succefull send mail';
           this.openSnackBarSuccesfull();
-          this.sendPasswordData = {};
+          this.sendPasswordData = {}
         },
         error: (e) => {
           this.message = e.error.message;
