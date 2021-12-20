@@ -36,6 +36,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'editTaskImg/:_id',
+    component: EditTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'listWorkB',
     component: ListTableComponent,
     canActivate: [AuthGuard],

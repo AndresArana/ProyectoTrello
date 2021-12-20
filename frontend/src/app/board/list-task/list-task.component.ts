@@ -39,22 +39,16 @@ export class ListTaskComponent implements OnInit {
   ngOnInit(): void {
     this._boardService.listTask().subscribe({
       next: (v) => {
-        //this.findTask()
-        var output = document.getElementById('edit')
-        //output?.innerHTML = this.taskData;
         this.taskData = v.taskList;
         this.taskData.forEach((tk: any) => {
           if (tk.taskStatus === 'to-do') {
             this.taskTodo.push(tk);
-            console.log(tk);
           }
           if (tk.taskStatus === 'in-progress') {
             this.taskInprogress.push(tk);
-            console.log(tk);
           }
           if (tk.taskStatus === 'done') {
             this.taskDone.push(tk);
-            console.log(tk);
           }
         });
       },
@@ -85,10 +79,6 @@ export class ListTaskComponent implements OnInit {
     }
   }
 
-  // findIndex(){
-  //   let indice = this.taskTodo.findIndex(this._boardService.findTask = this._id);
-  //   return indice = 
-  // }
 
 
   updateTask(task: any, status: string) {
@@ -108,22 +98,6 @@ export class ListTaskComponent implements OnInit {
     });
   }
 
-  // updateTask(task: any, status: string) {
-  //   let tempStatus = task.taskStatus;
-  //   task.taskStatus = status;
-  //   this._boardService.updateTask(task).subscribe({
-  //     next: (v) => {
-  //       task.status = status;
-  //       this.resetList();
-  //     },
-  //     error: (e) => {
-  //       task.status = tempStatus;
-  //       this.message = e.error.message;
-  //       this.openSnackBarError();
-  //     },
-  //     complete: () => console.info('complete'),
-  //   });
-  // }
 
 
   resetList() {
