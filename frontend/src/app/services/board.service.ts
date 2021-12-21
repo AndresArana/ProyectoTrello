@@ -12,10 +12,6 @@ export class BoardService {
     this.env = environment.APP_URL;
   }
 
-  saveTask(board: any) {
-    return this._http.post<any>(this.env + 'board/saveTask', board);
-  }
-
   saveTaskImg(board: any) {
     return this._http.post<any>(this.env + 'board/saveTaskImg', board);
   }
@@ -24,8 +20,20 @@ export class BoardService {
     return this._http.get<any>(this.env + 'board/listTask');
   }
 
+  findTask(_id: string) {
+    return this._http.get<any>(this.env + 'board/findTask/' + _id);
+  }
+
   updateTask(board: any) {
     return this._http.put<any>(this.env + 'board/updateTask', board);
+  }
+
+  editTask(board: any) {
+    return this._http.put<any>(this.env + 'board/editTask', board);
+  }
+
+  editTaskImg(board: any) {
+    return this._http.put<any>(this.env + 'board/editTaskImg', board);
   }
 
   deleteTask(board: any) {

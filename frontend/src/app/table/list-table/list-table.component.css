@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  min-height:85vh;
+}
+
+.accordion_display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordion_size {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  padding: 100px 16px 0;
+}
+
+.spacer {
+  flex: 1 0 auto;
+}
+
+.mat-icon {
+  padding-right: 15px;
+}
+
+.mat-icon:hover {
+  color: #ff0606;
+  cursor: pointer;
+}

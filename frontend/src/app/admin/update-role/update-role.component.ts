@@ -37,16 +37,16 @@ export class UpdateRoleComponent implements OnInit {
   ngOnInit(): void {
     this._Arouter.params.subscribe((params) => {
       this._id = params['_id'];
-      this._roleService.findRole(this._id).subscribe(
-        (res) => {
-          this.registerData = res.roleId
+      this._roleService.findRole(this._id).subscribe({
+        next: (v) => {
+          this.registerData = v.roleId
           console.log(this.registerData);
         },
-        (err) => {
-          this.message = err.error;
+        error: (e) => {
+          this.message = e.error;
           this.openSnackBarError();
         }
-      );
+      });
     });
   }
 

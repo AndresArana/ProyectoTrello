@@ -1,0 +1,42 @@
+.bgComponent {
+    background-color: #a5abaf;
+    width: 100%;
+    height: 50%;
+    padding-bottom: 30%;
+    background: url("https://previews.123rf.com/images/hdesert/hdesert1611/hdesert161100244/68522437-cuaderno-y-l%C3%A1piz-en-blanco-con-la-lista-de-tareas-sobre-un-fondo-oscuro-de-la-madera.jpg");
+    position: relative;
+    min-height: 90vh;
+}
+.imagen{
+    margin: 10px auto;
+    display: block;
+    max-width: 40%;
+    max-height: 40%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button {
+    width: 100%;
+    background-color: #3d3838;
+    color: white;
+}
+
+.card {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 16px 0px;
+}
+
+mat-card-title {
+    text-align: center;
+}

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const boardSchema = new mongoose.Schema({
     workBoardId: { type: mongoose.Schema.ObjectId, ref: "workboards" },
-    userId: { type: mongoose.Schema.ObjectId, ref: "users" },
     name: String,
     description: String,
     taskStatus: String,
