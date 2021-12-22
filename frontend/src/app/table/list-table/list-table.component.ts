@@ -49,6 +49,24 @@ export class ListTableComponent implements OnInit {
     });
   }
 
+  deleteTable(table: any) {
+    this._tableService.deleteTable(table).subscribe({
+      next: (v) => {
+        let index = this.tableData.indexOf(table);
+        if (index > -1) {
+          this.tableData.splice(index, 1);
+          this.message = v.message;
+          this.openSnackBarSuccesfull();
+        }
+      },
+      error: (e) => {
+        this.message = e.error.message;
+        this.openSnackBarError();
+      },
+      complete: () => console.info('complete'),
+    });
+  }
+
   openSnackBarSuccesfull() {
     this._snackBar.open(this.message, 'X', {
       horizontalPosition: this.horizontalPosition,

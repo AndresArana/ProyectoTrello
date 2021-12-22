@@ -14,7 +14,12 @@ export class TableService {
   saveWorkB(workBoard: any) {
     return this._http.post<any>(this.env + 'workB/saveWorkB', workBoard);
   }
+
   listWorkB() {
     return this._http.get<any>(this.env + 'workB/listWorkB');
+  }
+
+  deleteTable(table: any) {
+    return this._http.delete<any>(this.env + 'workB/deleteWorkB/' + table._id);
   }
 }

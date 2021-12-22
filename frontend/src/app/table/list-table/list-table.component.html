@@ -1,43 +1,32 @@
 <div class="container">
-  <div class="accordion_display">
-    <div class="accordion_size">
-      <mat-accordion multi="true" *ngIf="tableData.length">
-        <mat-expansion-panel
-          *ngFor="let table of tableData; let i = index"
-          hideToggle="false"
-          class="tarea"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span>{{ table.name }}</span>
-              <span class="spacer"></span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-panel-description>
-            {{ table.description }}
-          </mat-panel-description>
-          <mat-action-row>
-            <button
-              [routerLink]="['/listTask', tableData[i]._id]"
-              class="tarea"
-            >
+    <div class="accordion_display">
+        <div class="accordion_size">
+            <mat-accordion multi="true" *ngIf="tableData.length">
+                <mat-expansion-panel *ngFor="let table of tableData; let i = index" hideToggle="false" class="tarea">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>{{ table.name }}</span>
+                            <span class="spacer"></span>
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-panel-description>
+                        {{ table.description }}
+                    </mat-panel-description>
+                    <mat-action-row>
+                        <button [routerLink]="['/listTask', tableData[i]._id]" class="tarea">
               Abrir tablero
             </button>
-            <button
-              [routerLink]="['/saveTask', tableData[i]._id]"
-              class="tarea"
-            >
+                        <button [routerLink]="['/saveTask', tableData[i]._id]" class="tarea">
               Crear tarea
             </button>
 
-            <mat-icon>group_add</mat-icon>
-            <!-- <mat-icon color="primary" (click)="deleteTask(item)"
-                      >delete</mat-icon
-                    > -->
-            <span class="spacer"></span>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </mat-accordion>
+                        <mat-icon>group_add</mat-icon>
+
+                        <mat-icon class="colorDelete deleteIcon" (click)="deleteTable(table)">delete_forever</mat-icon>
+                        <span class="spacer "></span>
+                    </mat-action-row>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
     </div>
-  </div>
 </div>
