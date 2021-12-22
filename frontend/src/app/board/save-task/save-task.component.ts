@@ -34,29 +34,21 @@ export class SaveTaskComponent implements OnInit {
     this.selectedFile = null;
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   saveTask(){
     this._Arouter.params.subscribe((params)=>{
       this._id = params["_id"];
       if (!this.registerData.name || !this.registerData.description) {
         this.message = 'Failed process: Imcomplete data';
-        console.log(this._id);
-        console.log(this.registerData);
         this.openSnackBarError();
       } else {
         this._boardService.saveTask(this._id, this.registerData).subscribe({
           next: (v)=>{
-            console.log(this._id);
-            console.log(this.registerData);
             this._router.navigate([`/listTask/`+this._id]);
             this.message = 'Successfull task registration';
             this.openSnackBarSuccesfull();
             this.registerData = {};
-            console.log(this._id);
-            console.log(this.registerData);
           },
           error: (e) => {
             this.message = e.error.message;
@@ -76,7 +68,6 @@ export class SaveTaskComponent implements OnInit {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      console.log(this.registerData);
       this._boardService.saveTaskImg(this.registerData).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);

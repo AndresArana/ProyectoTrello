@@ -23,11 +23,7 @@ const listWorkB = async(req, res) => {
 
     const groupList = await group.find({ userId: req.user._id }).populate("workBoardId").exec();
 
-    console.log({ groupList });
-
     const worksGroup = workList.concat(groupList);
-
-    console.log({ worksGroup });
 
     return worksGroup.length === 0 ?
         res.status(400).send({ message: "You have no assigned work's boards" }) :

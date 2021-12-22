@@ -61,8 +61,7 @@ export class ListTaskComponent implements OnInit {
         error: (e) => {
           this.message = e.error.message;
           this.openSnackBarError();
-        },
-        complete: () => console.info('complete'),
+        }
       });
     })
   }
@@ -100,8 +99,7 @@ export class ListTaskComponent implements OnInit {
         task.status = tempStatus;
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info(task),
+      }
     });
   }
 
@@ -129,8 +127,7 @@ export class ListTaskComponent implements OnInit {
       error: (e) => {
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
 
@@ -159,17 +156,14 @@ export class ListTaskComponent implements OnInit {
       this.taskData.forEach((tk: any) => {
         if (tk.taskStatus === 'to-do') {
           this.taskTodo.findIndex( tk._id ===this._boardService.findTask(tk._id));
-          console.log(index);
           return index
         }
         if (tk.taskStatus === 'in-progress') {
           this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
-          console.log(index);
           return index
         }
         if (tk.taskStatus === 'done') {
           this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
-          console.log(index);
           return index
         }
       });
@@ -196,8 +190,7 @@ export class ListTaskComponent implements OnInit {
       error: (e) => {
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
 

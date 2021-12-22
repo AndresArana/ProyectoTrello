@@ -41,13 +41,11 @@ export class ListTableComponent implements OnInit {
     this._tableService.listWorkB().subscribe({
       next: (v) => {
         this.tableData = v.worksGroup;
-        console.log(this.tableData);
       },
       error: (e) => {
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
 
