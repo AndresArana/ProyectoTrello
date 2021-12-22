@@ -132,9 +132,8 @@ const editTaskImg = async(req, res) => {
     )
         return res.status(400).send({ message: "Incomplete data" });
 
-    let imageUrl = "";
+    let imageUrl = req.body.imageUrl;
     if (Object.keys(req.files).length === 0) {
-        imageUrl = "";
     } else {
         if (req.files.image) {
             if (req.files.image.type != null) {
