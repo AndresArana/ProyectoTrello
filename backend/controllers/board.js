@@ -126,7 +126,7 @@ const deleteTask = async(req, res) => {
     //     res.status(200).send({ message: "Task deleted" });
 };
 
-const editTask = async(req, res) => {
+const editTaskImg = async(req, res) => {
     if (!req.body._id ||
         (!req.body.name && !req.body.description && !req.body.imageUrl)
     )
@@ -164,12 +164,23 @@ const editTask = async(req, res) => {
         res.status(200).send({ message: "edited task" });
 };
 
+const findTask = async(req, res) => {
+    const taskfind = await board
+        .findById({ _id: req.params["_id"] })
+        .populate("userId")
+        .exec();
+    return !taskfind ?
+        res.status(400).send({ message: "No search results" }) :
+        res.status(200).send({ taskfind });
+};
+
 export default {
     saveTaskImg,
     listTask,
     updateTask,
     deleteTask,
-    editTask,
+    editTaskImg,
     listBoardByIdWork,
     saveTaskWork,
+    findTask,
 };

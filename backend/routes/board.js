@@ -12,11 +12,10 @@ router.post("/saveTaskImg/:_id", mult, formatFile, auth, board.saveTaskImg); // 
 router.post("/saveTaskWork/:_id", auth, board.saveTaskWork);
 router.get("/listTask", auth, board.listTask);
 router.get("/listTaskByIdW/:_id", auth, board.listBoardByIdWork);
-//router.post("/saveTask", mult, formatFile, auth, board.saveTask);
 router.put("/updateTask", auth, board.updateTask);
-router.put("/editTaskImg", auth, mult, formatFile, board.editTask);
-router.put("/editTask", auth, board.editTask);
+router.put("/editTaskImg", auth, mult, formatFile, board.editTaskImg);
 router.delete("/deleteTask/:_id", auth, validId, board.deleteTask);
+router.get("/findTask/:_id", auth, board.findTask);
 
 
 export default router;

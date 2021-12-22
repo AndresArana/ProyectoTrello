@@ -14,8 +14,8 @@ import {
 })
 export class EditTaskComponent implements OnInit {
   selectedFile: any;
-  message: string = '';
   registerData: any;
+  message: string = '';
   _id: string;
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -50,36 +50,7 @@ export class EditTaskComponent implements OnInit {
 
   uploadImg(event: any) {
     this.selectedFile = <File>event.target.files[0];
-  }
-
-  editTask() {
-    if (!this.registerData.name || !this.registerData.description) {
-      this.message = 'Failed process: Imcomplete data';
-      this.openSnackBarError();
-    } else {
-      const data = new FormData();
-      if (this.selectedFile != null) {
-        data.append('image', this.selectedFile, this.selectedFile.name);
-      }
-      data.append('name', this.registerData.name);
-      data.append('description', this.registerData.description);
-      console.log(data)
-      this._boardService.editTask(data).subscribe({
-        next: (v) => {
-          this._router.navigate(['/listTask']);
-          this.message = 'Successfull edit Task';
-          this.openSnackBarSuccesfull();
-          this.registerData = {};
-          console.log(this.registerData);
-        },
-        error: (e) => {
-          this.message = e.error.message;
-          this.openSnackBarError();
-        },
-        complete: () => console.info('complete'),
-      }
-      );
-    }
+    console.log(this.selectedFile.name);
   }
 
   editTaskImg() {
@@ -93,10 +64,11 @@ export class EditTaskComponent implements OnInit {
       }
       data.append('name', this.registerData.name);
       data.append('description', this.registerData.description);
+      data.append('_id', this.registerData._id);
       console.log(data)
       this._boardService.editTaskImg(data).subscribe({
         next: (v) => {
-          this._router.navigate(['/listTask']);
+          this._router.navigate(['/listTask/' + this.registerData.workBoardId]);
           this.message = 'Successfull edit Task';
           this.openSnackBarSuccesfull();
           this.registerData = {};
@@ -110,22 +82,6 @@ export class EditTaskComponent implements OnInit {
       });
     }
   }
-
-  // findTask(){
-  //   this._Arouter.params.subscribe((params) => {
-  //     this._id = params['_id'];
-  //     this._boardService.findTask(this._id).subscribe(
-  //       (res) => {
-  //         console.log(this.registerData);
-  //       },
-  //       (err) => {
-  //         this.message = err.error;
-  //         this.openSnackBarError();
-  //       },
-  //     );
-
-  //   });
-  // }
 
   openSnackBarSuccesfull() {
     this._snackBar.open(this.message, 'X', {
