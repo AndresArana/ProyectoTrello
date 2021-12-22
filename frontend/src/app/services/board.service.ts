@@ -16,8 +16,8 @@ export class BoardService {
     return this._http.post<any>(this.env + 'board/saveTaskWork/' + _id, board);
   }
 
-  saveTaskImg(board: any) {
-    return this._http.post<any>(this.env + 'board/saveTaskImg', board);
+  saveTaskImg(_id:string, board: any) {
+    return this._http.post<any>(this.env + 'board/saveTaskImg' + _id, board);
   }
 
   listTask() {
