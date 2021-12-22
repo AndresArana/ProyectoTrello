@@ -81,8 +81,12 @@ const listBoardByIdWork = async(req, res) => {
         workBoardId: req.params["_id"],
     });
 
+    const boardGroupList = await board.find({
+        workBoardId: req.params["_id"],
+    });
+
     return boardList.length === 0 ?
-        res.status(400).send({ message: "You no have work board assigned" }) :
+        res.status(400).send({ message: "You have no assigned tasks" }) :
         res.status(200).send({ boardList });
 };
 

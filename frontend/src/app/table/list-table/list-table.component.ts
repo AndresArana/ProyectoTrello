@@ -38,7 +38,7 @@ export class ListTableComponent implements OnInit {
   ngOnInit(): void {
     this._tableService.listWorkB().subscribe({
       next: (v) => {
-        this.tableData = v.workList;
+        this.tableData = v.worksGroup;
         console.log(this.tableData);
       },
       error: (e) => {

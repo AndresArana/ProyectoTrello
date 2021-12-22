@@ -1,5 +1,6 @@
 import workBoard from "../models/workBoard.js";
 import board from "../models/board.js";
+import group from "../models/group.js";
 
 const saveWorkB = async(req, res) => {
     if (!req.body.name || !req.body.description)
@@ -20,10 +21,19 @@ const saveWorkB = async(req, res) => {
 const listWorkB = async(req, res) => {
     const workList = await workBoard.find({ userId: req.user._id });
 
-    return workList.length === 0 ?
-        res.status(400).send({ message: "You have no assigned works board" }) :
-        res.status(200).send({ workList });
+    const groupList = await group.find({ userId: req.user._id }).populate("workBoardId").exec();
+
+    console.log({ groupList });
+
+    const worksGroup = workList.concat(groupList);
+
+    console.log({ worksGroup });
+
+    return worksGroup.length === 0 ?
+        res.status(400).send({ message: "You have no assigned work's boards" }) :
+        res.status(200).send({ worksGroup });
 };
+
 
 const updateWorkB = async(req, res) => {
     if (!req.body._id || !req.body.name || !req.body.description)
@@ -53,8 +63,7 @@ const deleteWorkB = async(req, res) => {
 };
 
 const findWork = async(req, res) => {
-    const workfind = await workBoard
-        .findById({ _id: req.params["_id"] });
+    const workfind = await workBoard.findById({ _id: req.params["_id"] });
     return !workfind ?
         res.status(400).send({ message: "No search results" }) :
         res.status(200).send({ workfind });

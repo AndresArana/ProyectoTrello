@@ -12,8 +12,8 @@ export class BoardService {
     this.env = environment.APP_URL;
   }
 
-  saveTask(board: any) {
-    return this._http.post<any>(this.env + 'board/saveTask', board);
+  saveTask( _id:string, board: any) {
+    return this._http.post<any>(this.env + 'board/saveTaskWork/' + _id, board);
   }
 
   saveTaskImg(board: any) {
