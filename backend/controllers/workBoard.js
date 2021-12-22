@@ -1,6 +1,6 @@
 import workBoard from "../models/workBoard.js";
 import board from "../models/board.js";
-import moment from "moment";
+import group from "../models/group.js";
 
 const saveWorkB = async(req, res) => {
     if (!req.body.name || !req.body.description)
@@ -21,11 +21,17 @@ const saveWorkB = async(req, res) => {
 const listWorkB = async(req, res) => {
     const workList = await workBoard.find({ userId: req.user._id });
 
-    return workList.length === 0 ? res.status(400).send({ message: "You have no assigned works board" }) : res.status(200).send({ workList });
+    const groupList = await group.find({ userId: req.user._id }).populate("workBoardId").exec();
+
+    const worksGroup = workList.concat(groupList);
+
+    return worksGroup.length === 0 ?
+        res.status(400).send({ message: "You have no assigned work's boards" }) :
+        res.status(200).send({ worksGroup });
 };
 
-const updateWorkB = async(req, res) => {
 
+const updateWorkB = async(req, res) => {
     if (!req.body._id || !req.body.name || !req.body.description)
         return res.status(400).send({ message: "Incomplete data" });
 
@@ -34,7 +40,29 @@ const updateWorkB = async(req, res) => {
         description: req.body.description,
     });
 
-    return !workUpdate ? res.status(400).send({ message: "Error editing work" }) : res.status(200).send({ message: "Work update" });
+    return !workUpdate ?
+        res.status(400).send({ message: "Error editing work" }) :
+        res.status(200).send({ message: "Work update" });
 };
 
-export default { saveWorkB, listWorkB, updateWorkB };
+
+const deleteWorkB = async(req, res) => {
+    const workId = await workBoard.findById({ _id: req.params["_id"] });
+    if (!workId) return res.status(400).send({ message: "Work board not found" });
+
+    const boardList = await board.deleteMany({ workBoardId: workId });
+
+    const workDelete = await workBoard.findByIdAndDelete({ _id: req.params["_id"] });
+    return !workDelete ?
+        res.status(400).send({ message: "Work board not found" }) :
+        res.status(200).send({ message: "Work board deleted" });
+};
+
+const findWork = async(req, res) => {
+    const workfind = await workBoard.findById({ _id: req.params["_id"] });
+    return !workfind ?
+        res.status(400).send({ message: "No search results" }) :
+        res.status(200).send({ workfind });
+};
+
+export default { saveWorkB, listWorkB, updateWorkB, deleteWorkB, findWork };

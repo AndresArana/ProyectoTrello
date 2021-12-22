@@ -1,0 +1,52 @@
+.accordion_display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordion_size {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  padding: 100px 16px 0;
+}
+
+.spacer {
+  flex: 1 0 auto;
+}
+
+.btnDone {
+  background-color: #5c9b1e;
+  color: #ffffff;
+}
+
+.btnInProgress {
+  background-color: #df7b0a;
+  color: #ffffff;
+}
+
+.btnToDo {
+  background-color: #b1250c;
+  color: #ffffff;
+}
+
+.btnSelectDone {
+  color: #5c9b1e;
+}
+
+.btnSelectToDo {
+  color: #b1250c;
+}
+
+.btnSelectInProgress {
+  color: #df7b0a;
+}
+
+.mat-icon {
+  padding-right: 15px;
+}
+
+.mat-icon:hover {
+  color: #ff0606;
+  cursor: pointer;
+}

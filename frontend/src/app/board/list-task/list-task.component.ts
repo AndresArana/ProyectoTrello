@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../services/board.service';
+import { ActivatedRoute } from '@angular/router';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -17,6 +18,7 @@ import {
   styleUrls: ['./list-task.component.css'],
 })
 export class ListTaskComponent implements OnInit {
+  _id: string;
   taskData: any;
   taskTodo: any;
   taskInprogress: any;
@@ -28,8 +30,10 @@ export class ListTaskComponent implements OnInit {
 
   constructor(
     private _boardService: BoardService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _Arouter: ActivatedRoute,
   ) {
+    this._id='';
     this.taskData = {};
     this.taskTodo = [];
     this.taskInprogress = [];
@@ -37,27 +41,29 @@ export class ListTaskComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._boardService.listTask().subscribe({
-      next: (v) => {
-        this.taskData = v.taskList;
-        this.taskData.forEach((tk: any) => {
-          if (tk.taskStatus === 'to-do') {
-            this.taskTodo.push(tk);
-          }
-          if (tk.taskStatus === 'in-progress') {
-            this.taskInprogress.push(tk);
-          }
-          if (tk.taskStatus === 'done') {
-            this.taskDone.push(tk);
-          }
-        });
-      },
-      error: (e) => {
-        this.message = e.error.message;
-        this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
-    });
+    this._Arouter.params.subscribe((params) => {
+      this._id = params['_id'];
+      this._boardService.listTaskId(this._id).subscribe({
+        next: (v) => {
+          this.taskData = v.boardList;
+          this.taskData.forEach((tk: any) => {
+            if (tk.taskStatus === 'to-do') {
+              this.taskTodo.push(tk);
+            }
+            if (tk.taskStatus === 'in-progress') {
+              this.taskInprogress.push(tk);
+            }
+            if (tk.taskStatus === 'done') {
+              this.taskDone.push(tk);
+            }
+          });
+        },
+        error: (e) => {
+          this.message = e.error.message;
+          this.openSnackBarError();
+        }
+      });
+    })
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -79,6 +85,8 @@ export class ListTaskComponent implements OnInit {
     }
   }
 
+
+
   updateTask(task: any, status: string) {
     let tempStatus = task.taskStatus;
     task.taskStatus = status;
@@ -91,18 +99,19 @@ export class ListTaskComponent implements OnInit {
         task.status = tempStatus;
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
+
+
 
   resetList() {
     this.taskTodo = [];
     this.taskInprogress = [];
     this.taskDone = [];
-    this._boardService.listTask().subscribe({
+    this._boardService.listTaskId(this._id).subscribe({
       next: (v) => {
-        this.taskData = v.taskList;
+        this.taskData = v.boardList;
         this.taskData.forEach((tk: any) => {
           if (tk.taskStatus === 'to-do') {
             this.taskTodo.push(tk);
@@ -118,8 +127,7 @@ export class ListTaskComponent implements OnInit {
       error: (e) => {
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
 
@@ -141,6 +149,33 @@ export class ListTaskComponent implements OnInit {
     });
   }
 
+  findTask(task: any){
+   this._boardService.findTask(task).subscribe({
+     next: (v) =>{
+      let index = this.taskData.indexOf(task);
+      this.taskData.forEach((tk: any) => {
+        if (tk.taskStatus === 'to-do') {
+          this.taskTodo.findIndex( tk._id ===this._boardService.findTask(tk._id));
+          return index
+        }
+        if (tk.taskStatus === 'in-progress') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          return index
+        }
+        if (tk.taskStatus === 'done') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          return index
+        }
+      });
+     },
+     error: (e) => {
+      this.message = e.error.message;
+      this.openSnackBarError();
+    },
+    complete: () => console.info('complete'),
+   })
+  }
+
   deleteTask(task: any) {
     this._boardService.deleteTask(task).subscribe({
       next: (v) => {
@@ -155,8 +190,7 @@ export class ListTaskComponent implements OnInit {
       error: (e) => {
         this.message = e.error.message;
         this.openSnackBarError();
-      },
-      complete: () => console.info('complete'),
+      }
     });
   }
 

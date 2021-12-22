@@ -10,6 +10,7 @@ import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { ListTaskComponent } from './board/list-task/list-task.component';
+import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { RegisterUserComponent } from './admin/register-user/register-user.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
@@ -39,6 +40,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { WelcomeComponent } from './home/welcome/welcome.component';
+import { SendPasswordComponent } from './home/send-password/send-password.component';
+import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
+import { ListTableComponent } from './table/list-table/list-table.component';
+import { SaveTableComponent } from './table/save-table/save-table.component';
+//modulos para inicio de sesion con redes sociales
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
 
 @NgModule({
   declarations: [
@@ -55,6 +68,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     RegisterRoleComponent,
     ListRoleComponent,
     UpdateRoleComponent,
+    EditTaskComponent,
+    WelcomeComponent,
+    SendPasswordComponent,
+    ForgotPasswordComponent,
+    ListTableComponent,
+    SaveTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +95,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatPaginatorModule,
     MatSortModule,
     DragDropModule,
+    SocialLoginModule
   ],
   providers: [
     UserService,
@@ -88,6 +108,24 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
       useClass: TokenInterceptorService,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '382890277647-du9jbjog6j009fffklsng6gveq5pphdp.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
 })
