@@ -45,6 +45,12 @@ import { SendPasswordComponent } from './home/send-password/send-password.compon
 import { ForgotPasswordComponent } from './home/forgot-password/forgot-password.component';
 import { ListTableComponent } from './table/list-table/list-table.component';
 import { SaveTableComponent } from './table/save-table/save-table.component';
+//modulos para inicio de sesion con redes sociales
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 
 
 @NgModule({
@@ -89,6 +95,7 @@ import { SaveTableComponent } from './table/save-table/save-table.component';
     MatPaginatorModule,
     MatSortModule,
     DragDropModule,
+    SocialLoginModule
   ],
   providers: [
     UserService,
@@ -101,6 +108,24 @@ import { SaveTableComponent } from './table/save-table/save-table.component';
       useClass: TokenInterceptorService,
       multi: true,
     },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '382890277647-du9jbjog6j009fffklsng6gveq5pphdp.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent],
 })

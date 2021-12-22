@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 export class UserService {
   private env: string;
 
-  constructor(private _http: HttpClient, private _router: Router) {
+  constructor(
+    private _http: HttpClient,
+    private _router: Router
+  ) {
     this.env = environment.APP_URL;
   }
 
@@ -58,11 +61,11 @@ export class UserService {
   }
 
   logout() {
+    location.reload();
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     this._router.navigate(['/login']);
   }
-
   sendPassword(user: any) {
     return this._http.post<any>(this.env + 'user/sendPassword', user);
   }
@@ -75,4 +78,7 @@ export class UserService {
     return this._http.get<any>(this.env + 'user/findUserPass/' + _id);
   }
 
+  registerUserGoogle(user: any) {
+    return this._http.post<any>(this.env + 'user/registerUserGoogle', user);
+  }
 }

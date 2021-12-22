@@ -6,6 +6,12 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { SocialAuthService } from 'angularx-social-login';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+import { SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +19,9 @@ import {
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  registerData: any;
+  user: any = SocialUser;
+  loggedIn: boolean = true;
   loginData: any;
   message: string = '';
   horizontalPosition: MatSnackBarHorizontalPosition = 'end';
@@ -20,14 +29,58 @@ export class LoginComponent implements OnInit {
   durationInSeconds: number = 2;
 
   constructor(
+    private authService: SocialAuthService,
     private _userService: UserService,
     private _router: Router,
     private _snackBar: MatSnackBar
   ) {
     this.loginData = {};
   }
+  refreshToken(): void {
+    this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loginGoogle();
+      this.loggedIn = user != null;
+    });
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+  loginGoogle() {
+    this.loginData = this.user;
+    if (!this.user.email) {
+      this.message = 'Failed process: Imcomplete data';
+      this.openSnackBarError();
+    } else {
+      this.loginData = this.user;
+      this._userService.registerUserGoogle(this.loginData).subscribe({
+        next: (v) => {
+          localStorage.setItem('token', v.token);
+          this._router.navigate(['/listWorkB']);
+          this.message = 'Successfull user registration';
+          this.loginData = {};
+        },
+        error: (e) => {
+          this.message = e.error.message;
+          this.openSnackBarError();
+        },
+        complete: () => console.info('complete'),
+      });
+    }
+  }
 
   login() {
     if (!this.loginData.email || !this.loginData.password) {

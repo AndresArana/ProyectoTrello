@@ -16,5 +16,6 @@ router.put("/forgotPassword",auth, user.forgotPassword);
 router.post("/sendPassword", user.sendPassword);
 router.delete("/deleteUser/:_id", auth,validId , admin, user.deleteUser);
 router.get("/findUserPass/:_id", auth, validId, user.findUserPass);
+router.post("/registerUserGoogle", user.registerUserGoogle);
 
 export default router;

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
@@ -103,6 +103,7 @@ const routes: Routes = [
     component: ForgotPasswordComponent,
     canActivate: [AuthGuard],
   },
+
 ];
 
 @NgModule({

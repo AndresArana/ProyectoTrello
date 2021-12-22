@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../services/board.service';
 import { Router } from '@angular/router';
+import { TableService } from 'src/app/services/table.service';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
@@ -21,6 +22,7 @@ export class SaveTaskComponent implements OnInit {
   durationInSeconds: number = 2;
 
   constructor(
+    private _tableService: TableService,
     private _boardService: BoardService,
     private _router: Router,
     private _snackBar: MatSnackBar
@@ -29,7 +31,19 @@ export class SaveTaskComponent implements OnInit {
     this.selectedFile = null;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._tableService.listWorkB().subscribe({
+      next: (v) => {
+        this.registerData = v.workList;
+        console.log(this.registerData);
+      },
+      error: (e) => {
+        this.message = e.error.message;
+        this.openSnackBarError();
+      },
+      complete: () => console.info('complete'),
+    });
+  }
 
   uploadImg(event: any) {
     this.selectedFile = <File>event.target.files[0];
@@ -40,14 +54,8 @@ export class SaveTaskComponent implements OnInit {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      const data = new FormData();
-      if (this.selectedFile != null) {
-        data.append('image', this.selectedFile, this.selectedFile.name);
-      }
-      data.append('name', this.registerData.name);
-      data.append('description', this.registerData.description);
-      console.log(data);
-      this._boardService.saveTaskImg(data).subscribe({
+      console.log(this.registerData);
+      this._boardService.saveTaskImg(this.registerData).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);
           this.message = 'Task create';
