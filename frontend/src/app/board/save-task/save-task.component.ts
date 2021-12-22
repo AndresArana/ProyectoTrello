@@ -36,52 +36,38 @@ export class SaveTaskComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  saveTask(){
+  uploadImg(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+  }
+
+  saveTaskImg() {
     this._Arouter.params.subscribe((params)=>{
       this._id = params["_id"];
       if (!this.registerData.name || !this.registerData.description) {
         this.message = 'Failed process: Imcomplete data';
         this.openSnackBarError();
       } else {
-        this._boardService.saveTask(this._id, this.registerData).subscribe({
-          next: (v)=>{
-            this._router.navigate([`/listTask/`+this._id]);
-            this.message = 'Successfull task registration';
+        const data = new FormData();
+        if (this.selectedFile != null) {
+          data.append('image', this.selectedFile, this.selectedFile.name);
+        }
+        data.append('name', this.registerData.name);
+        data.append('description', this.registerData.description);
+        this._boardService.saveTaskImg(this._id, data).subscribe({
+          next: (v) => {
+            this._router.navigate(['/listTask/' + this._id]);
+            this.message = 'Task create';
             this.openSnackBarSuccesfull();
             this.registerData = {};
           },
           error: (e) => {
             this.message = e.error.message;
             this.openSnackBarError();
-          }
+          },
+          complete: () => console.info('complete'),
         });
       }
     });
-  }
-
-  uploadImg(event: any) {
-    this.selectedFile = <File>event.target.files[0];
-  }
-
-  saveTaskImg() {
-    if (!this.registerData.name || !this.registerData.description) {
-      this.message = 'Failed process: Imcomplete data';
-      this.openSnackBarError();
-    } else {
-      this._boardService.saveTaskImg(this._id, this.registerData).subscribe({
-        next: (v) => {
-          this._router.navigate(['/listTask']);
-          this.message = 'Task create';
-          this.openSnackBarSuccesfull();
-          this.registerData = {};
-        },
-        error: (e) => {
-          this.message = e.error.message;
-          this.openSnackBarError();
-        },
-        complete: () => console.info('complete'),
-      });
-    }
   }
 
   openSnackBarSuccesfull() {
