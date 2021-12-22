@@ -1,4 +1,4 @@
-.container {
+/* .container {
   display: flex;
   flex-direction: column;
 }
@@ -30,4 +30,225 @@
 
 mat-card-title {
   text-align: center;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  color: rgba(12, 12, 12, 0.74);
+  height: 100%;
+  margin: 0px;
+  padding: 10px 0px;
+  font-size: 28;
+  letter-spacing: 3pt;
+  text-align: center;
+}
+
+section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+section .imgBx {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+section .imgBx img {
+  top: 0;
+  left: 0;
+  width: 400px;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-title {
+  color: #03045e;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border-bottom: 4px solid #a55800;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+section .imagen-fondo{
+  position: static;
+  width: 100%;
+}
+
+section .bgComponent {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #25343b alpha(opacity=41230);
+}
+
+section .bgComponent .form {
+  width: 30%;
+}
+
+section .bgComponent .form .inputBx {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+section .bgComponent .form .inputBx input {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  font-weight: 400;
+  border: 1px solid #607d8b;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #25343b;
+  background: transparent;
+  border-radius: 10px;
+}
+
+section .bgComponent .form a {
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: transparent;
+  border-radius: 30px;
+  color: rgb(34, 34, 34);
+  cursor: pointer;
+}
+
+section .bgComponent .form a:hover {
+  color: #ef476f;
+}
+
+.line {
+  background: #000;
+  height: 1px;
+}
+
+section .bgComponent .form .inputBx input[type="submit"] {
+  background: #149cbe;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+section .bgComponent .form .inputBx input[type="submit"]:hover {
+  background: #1e91ad;
+}
+
+section .bgComponent h3 {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #607d8b;
+  text-align: center;
+  margin: 10px 0 10px;
+  font-weight: 500;
+}
+
+section .bgComponent a {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 20px;
+}
+
+section .bgComponent .sci {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section .bgComponent li {
+  list-style: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #9db6c2;
+  border-radius: 50%;
+  margin: 0 7px;
+  cursor: pointer;
+}
+
+section .bgComponent li:hover {
+  background: cornflowerblue;
+}
+
+section .bgComponent li img {
+  transform: scale(0.5);
+  filter: invert(1);
+}
+
+section .imagen {
+  margin: 10px auto;
+  display: block;
+  max-width: 100%;
+  max-height: 40%;
+}
+
+@media (max-width: 768px) {
+  p {
+    font-size: 0;
+  }
+
+  section .bgComponent .form .inputBx a {
+    font-size: 11px;
+  }
+
+  section .imgBx {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: auto;
+  }
+
+  section .bgComponent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  section .bgComponent .form {
+    width: 100%;
+    padding: 20px;
+    background: rgb(255 255 255 / 0.9);
+    margin: 30px;
+    border-radius: 20px;
+  }
+
+  .contentBx .formBx h3 {
+    color: #607d8b;
+    text-align: center;
+    margin: 30px 0 10px;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 1060px) {
+  section .bgComponent .form .inputBx a {
+    font-size: 10px;
+  }
 }

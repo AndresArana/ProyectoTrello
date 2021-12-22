@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bgHeader" *ngIf="_userService.loggedIn()">
+<!-- <nav class="navbar navbar-expand-lg bgHeader" *ngIf="_userService.loggedIn()">
   <a class="navbar-brand" href="/listTask/"
     ><img class="icono" src="../../../assets/icono.png" width="26" height="26"
   /></a>
@@ -16,22 +16,6 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown2">
     <ul class="navbar-nav">
-      <!-- <li class="nav-item active">
-        <a
-          class="nav-link"
-          *ngIf="_userService.loggedIn()"
-          routerLink="listTask"
-          >List task</a
-        >
-      </li> -->
-      <!-- <li class="nav-item">
-        <a
-          class="nav-link"
-          *ngIf="_userService.loggedIn()"
-          routerLink="saveTask"
-          >Create task</a
-        >
-      </li> -->
       <div
         class="collapse navbar-collapse"
         id="navbarNavDarkDropdown"
@@ -46,7 +30,6 @@
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              
             >
               Tasks
             </a>
@@ -156,4 +139,93 @@
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<header *ngIf="_userService.loggedIn()">
+  <div class="container">
+    <input type="checkbox" name="" id="check" />
+
+    <a class="logo-containe" href="/listTask/"
+    ><img class="icono" src="../../../assets/icono.png" width="26" height="26"
+  /></a>
+
+    <div class="nav-btn">
+      <div class="nav-links">
+        <ul>
+          <li class="nav-link" style="--i: 0.6s">
+            <a href="#">Home</a>
+          </li>
+          <li
+          role="button"
+            class="nav-link"
+            style="--i: 0.85s"
+            *ngIf="_userService.loggedIn()"
+          >
+            <a *ngIf="_userService.loggedIn()"
+              >Tables<i class="fas fa-caret-down"></i
+            ></a>
+            <div class="dropdown">
+              <ul>
+                <li class="dropdown-link">
+                  <a routerLink="listWorkB">List Tables</a>
+                </li>
+                <li class="dropdown-link">
+                  <a routerLink="saveWorkB">Create Table</a>
+                </li>
+                <div class="arrow"></div>
+              </ul>
+            </div>
+          </li>
+          <li
+          role="button"
+            class="nav-link"
+            style="--i: 0.85s"
+            *ngIf="_userService.loggedIn() && _userService.isAdmin()"
+          >
+            <a *ngIf="_userService.loggedIn() && _userService.isAdmin()"
+              >Admin options<i class="fas fa-caret-down"></i
+            ></a>
+            <div class="dropdown">
+              <ul>
+                <li class="dropdown-link">
+                  <a routerLink="listUser">Users</a>
+                </li>
+                <li class="dropdown-link">
+                  <a routerLink="listRole">Roles</a>
+                </li>
+                <div class="arrow"></div>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="log-sign" style="--i: 1.8s">
+        <a
+          class="btn transparent"
+          *ngIf="!_userService.loggedIn()"
+          mat-button
+          routerLink="login"
+          >Login</a
+        >
+        <a
+          class="btn solid"
+          *ngIf="_userService.loggedIn()"
+          mat-button
+          (click)="_userService.logout()"
+          >Logout</a
+        >
+      </div>
+    </div>
+    <div class="hamburger-menu-container">
+      <div class="hamburger-menu">
+        <div></div>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="overlay"></div>
+  </section>
+</main>

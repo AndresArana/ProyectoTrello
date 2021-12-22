@@ -1,40 +1,43 @@
-<div class="bgComponent">
-  <div class="form">
-    <mat-card class="card">
-      <img class="imagen" src="../../../assets/image001.png" />
-      <mat-card-title>User Login</mat-card-title>
+<section>
+  <div class="imgBx">
+    <img src="../../../assets/ind.jpg" />
+  </div>
+  <p>
+    Debbel siempre a tu lado.
+    <br />
+    Te da la facilidad de tener todas tus tareas presente.
+  </p>
+  <div class="bgComponent">
+    <div class="form">
+      <img class="imagen" src="../../../assets/debbel2.png" />
       <mat-card-content>
         <div class="container">
-          <mat-form-field>
-            <input
-              [(ngModel)]="loginData.email"
-              type="email"
-              matInput
-              placeholder="Email"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              [(ngModel)]="loginData.password"
-              type="password"
-              matInput
-              placeholder="Password"
-              required
-            />
-          </mat-form-field>
+          <div class="inputBx">
+            <span>email</span>
+            <input [(ngModel)]="loginData.email" type="email" required />
+          </div>
+
+          <div class="inputBx">
+            <span>password</span>
+            <input [(ngModel)]="loginData.password" type="password" required />
+          </div>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button (click)="login()" class="button" mat-raised-button>Go!!</button>
-      </mat-card-actions>
-      <mat-card-actions>
-        <button (click)="signInWithGoogle()" class="button2" mat-raised-button>
-          <img class="img1" src="../../../assets/IconoGoogleLogin.png"/>
-          Sign in with Google
-        </button>
-      </mat-card-actions>
-      <a class="hiper" href="/sendPassword/">forgot password</a>
-    </mat-card>
+      <div class="inputBx">
+        <input (click)="login()" type="submit" value="login" />
+      </div>
+
+      <a class="hiper" href="/sendPassword/">¿Did you forget your password?</a>
+      <hr />
+      <div class="inputBx">
+        <a class="hiper" href="/signUp" type="submit"
+          >Sign up to create an account</a
+        >
+      </div>
+      <h3>Login with social media</h3>
+      <ul (click)="signInWithGoogle()" class="sci">
+        <li><img src="../../../assets/google_negro.png" width="70px"></li>
+      </ul>
+    </div>
   </div>
-</div>
+</section>

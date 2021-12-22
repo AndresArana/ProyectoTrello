@@ -1,4 +1,4 @@
-<div class="bgComponent">
+<!-- <div class="bgComponent">
   <div class="form">
     <mat-card class="card">
       <mat-card-title>Register</mat-card-title>
@@ -39,5 +39,44 @@
       </mat-card-actions>
     </mat-card>
   </div>
-</div>
+</div> -->
 
+
+<section>
+  <div class="bgComponent">
+    <div class="form">
+      <img class="imagen" src="../../../assets/debbel2.png" />
+      <p>Sign up to post your tasks.</p>
+      <mat-card-content>
+        <div class="container">
+          <div class="inputBx">
+            <span>Name and lastname</span>
+            <input [(ngModel)]="registerData.name" type="text" required />
+          </div>
+
+          <div class="inputBx">
+            <span>email</span>
+            <input [(ngModel)]="registerData.email" type="email" required />
+          </div>
+
+          <div class="inputBx">
+            <span>password</span>
+            <input
+              [(ngModel)]="registerData.password"
+              type="password"
+              required
+            />
+          </div>
+        </div>
+      </mat-card-content>
+      <div class="inputBx">
+        <input (click)="registerUser()" type="submit" value="Register" />
+      </div>
+      <hr />
+      <a class="hiper" href="/login"
+        ><mat-icon>fast_rewind</mat-icon>Return to login</a
+      >
+    </div>
+  </div>
+  <img class="imagen-fondo" src="../../../assets/Fondo.jpg" />
+</section>
