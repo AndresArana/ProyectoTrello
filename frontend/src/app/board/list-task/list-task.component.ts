@@ -94,7 +94,7 @@ export class ListTaskComponent implements OnInit {
     this._boardService.updateTask(task).subscribe({
       next: (v) => {
         task.status = status;
-        // this.resetList();
+        this.resetList();
       },
       error: (e) => {
         task.status = tempStatus;
@@ -111,9 +111,9 @@ export class ListTaskComponent implements OnInit {
     this.taskTodo = [];
     this.taskInprogress = [];
     this.taskDone = [];
-    this._boardService.listTask().subscribe({
+    this._boardService.listTaskId(this._id).subscribe({
       next: (v) => {
-        this.taskData = v.taskList;
+        this.taskData = v.boardList;
         this.taskData.forEach((tk: any) => {
           if (tk.taskStatus === 'to-do') {
             this.taskTodo.push(tk);

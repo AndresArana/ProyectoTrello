@@ -51,7 +51,7 @@ export class SaveTaskComponent implements OnInit {
           next: (v)=>{
             console.log(this._id);
             console.log(this.registerData);
-            // this._router.navigate([`/listTask/`]);
+            this._router.navigate([`/listTask/`+this._id]);
             this.message = 'Successfull task registration';
             this.openSnackBarSuccesfull();
             this.registerData = {};
