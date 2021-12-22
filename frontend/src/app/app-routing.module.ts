@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListRoleComponent } from './admin/list-role/list-role.component';
 import { ListUserComponent } from './admin/list-user/list-user.component';
@@ -8,6 +8,7 @@ import { UpdateRoleComponent } from './admin/update-role/update-role.component';
 import { UpdateUserComponent } from './admin/update-user/update-user.component';
 import { ListTaskComponent } from './board/list-task/list-task.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
+import { EditTaskComponent } from './board/edit-task/edit-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
@@ -30,6 +31,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'editTask/:_id',
+    component: EditTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'editTaskImg/:_id',
+    component: EditTaskComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'listWorkB',
     component: ListTableComponent,
     canActivate: [AuthGuard],
@@ -39,6 +50,7 @@ const routes: Routes = [
     component: SaveTaskComponent,
     canActivate: [AuthGuard],
   },
+
   {
     path: 'saveWorkB',
     component: SaveTableComponent,
@@ -91,6 +103,7 @@ const routes: Routes = [
     component: ForgotPasswordComponent,
     canActivate: [AuthGuard],
   },
+
 ];
 
 @NgModule({

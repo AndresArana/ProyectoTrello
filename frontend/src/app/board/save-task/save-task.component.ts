@@ -76,14 +76,8 @@ export class SaveTaskComponent implements OnInit {
       this.message = 'Failed process: Imcomplete data';
       this.openSnackBarError();
     } else {
-      const data = new FormData();
-      if (this.selectedFile != null) {
-        data.append('image', this.selectedFile, this.selectedFile.name);
-      }
-      data.append('name', this.registerData.name);
-      data.append('description', this.registerData.description);
-
-      this._boardService.saveTaskImg(data).subscribe({
+      console.log(this.registerData);
+      this._boardService.saveTaskImg(this.registerData).subscribe({
         next: (v) => {
           this._router.navigate(['/listTask']);
           this.message = 'Task create';

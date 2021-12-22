@@ -8,6 +8,10 @@
   max-width: 40%;
   max-height: 40%;
 }
+.img1{
+  max-width: 5%;
+  max-height: 5%;
+}
 .button {
   width: 100%;
   background-color: #383d38;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TableService } from 'src/app/services/table.service';
+import { UserService } from '../../services/user.service';
 import {
   CdkDragDrop,
   moveItemInArray,
@@ -26,6 +27,7 @@ export class ListTableComponent implements OnInit {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   durationInSeconds: number = 2;
   constructor(
+    public _userService: UserService,
     private _tableService: TableService,
     private _snackBar: MatSnackBar
   ) {

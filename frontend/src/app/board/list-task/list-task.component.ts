@@ -86,6 +86,8 @@ export class ListTaskComponent implements OnInit {
     }
   }
 
+
+
   updateTask(task: any, status: string) {
     let tempStatus = task.taskStatus;
     task.taskStatus = status;
@@ -99,9 +101,11 @@ export class ListTaskComponent implements OnInit {
         this.message = e.error.message;
         this.openSnackBarError();
       },
-      complete: () => console.info('complete'),
+      complete: () => console.info(task),
     });
   }
+
+
 
   resetList() {
     this.taskTodo = [];
@@ -146,6 +150,36 @@ export class ListTaskComponent implements OnInit {
         this.updateTask(tk, 'done');
       }
     });
+  }
+
+  findTask(task: any){
+   this._boardService.findTask(task).subscribe({
+     next: (v) =>{
+      let index = this.taskData.indexOf(task);
+      this.taskData.forEach((tk: any) => {
+        if (tk.taskStatus === 'to-do') {
+          this.taskTodo.findIndex( tk._id ===this._boardService.findTask(tk._id));
+          console.log(index);
+          return index
+        }
+        if (tk.taskStatus === 'in-progress') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          console.log(index);
+          return index
+        }
+        if (tk.taskStatus === 'done') {
+          this.taskTodo.findIndex(tk._id === this._boardService.findTask(tk._id));
+          console.log(index);
+          return index
+        }
+      });
+     },
+     error: (e) => {
+      this.message = e.error.message;
+      this.openSnackBarError();
+    },
+    complete: () => console.info('complete'),
+   })
   }
 
   deleteTask(task: any) {
