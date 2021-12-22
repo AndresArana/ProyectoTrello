@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="example-container col">
+      <button [routerLink]="['/saveTask/', _id]">
+        crear task
+      </button>
       <h2 class="nb1">To do</h2>
-
       <div
         cdkDropList
         #todoList="cdkDropList"
@@ -94,9 +96,9 @@
         </div>
       </div>
     </div>
+
     <div class="example-container col">
       <h2 class="nb2">In-Progress</h2>
-
       <div
         cdkDropList
         #inprogressList="cdkDropList"
@@ -190,7 +192,6 @@
 
     <div class="example-container col">
       <h2 class="nb1">Done</h2>
-
       <div
         cdkDropList
         #doneList="cdkDropList"
@@ -279,6 +280,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
