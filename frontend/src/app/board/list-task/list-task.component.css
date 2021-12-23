@@ -4,8 +4,6 @@
   position: relative;
   min-height: 90vh;
 }
-p {
-}
 
 .accordion_display {
   display: flex;
