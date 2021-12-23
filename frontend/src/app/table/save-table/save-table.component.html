@@ -1,32 +1,32 @@
-<div class="bgComponent">
-  <div class="form">
-    <mat-card class="card">
-      <img class="imagen" src="../../../assets/tarea.jpg" />
-      <mat-card-title>Create Table</mat-card-title>
+<div class="cabe">
+  
+</div>
+<section>
+  
+  <div class="bgComponent">
+    <div class="dos">
+      <!-- <p>Administra tus horarios, tareas y carga de trabajo.</p> -->
+      <img class="imagen" src="../../../assets/table.png" />
+    </div>
+    
+    <div class="form">
+      <h2 class="text">YOUR WORK SPACES</h2>
       <mat-card-content>
         <div class="container">
-          <mat-form-field>
-            <input
-              [(ngModel)]="registerData.name"
-              matInput
-              placeholder="Table name"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <input
-              [(ngModel)]="registerData.description"
-              matInput
-              placeholder="Description"
-            />
-          </mat-form-field>
+          <div class="inputBx">
+            <span>Table name</span>
+            <input [(ngModel)]="registerData.name" type="text" required />
+          </div>
+
+          <div class="inputBx">
+            <span>description</span>
+            <input [(ngModel)]="registerData.description" type="text" required />
+          </div>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <li>
-          <a class="dropdown-item" (click)="saveWorkB()">Create Task</a>
-        </li>
-      </mat-card-actions>
-    </mat-card>
+      <div class="inputBx">
+        <button class="glow-on-hover" (click)="saveWorkB()">Create table</button>
+      </div>
+    </div>
   </div>
-</div>
+</section>
