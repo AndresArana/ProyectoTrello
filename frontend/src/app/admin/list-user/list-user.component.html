@@ -10,7 +10,7 @@
       <mat-label>search User</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="" #input />
     </mat-form-field>
-
+    <br />
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="NAME">
@@ -39,8 +39,8 @@
             <mat-icon
               class="colorUpdate updateIcon"
               [routerLink]="['/updateUser/', row._id]"
-              >border_color</mat-icon>
-            <mat-icon>maximize</mat-icon>
+              >border_color</mat-icon
+            >
             <mat-icon>maximize</mat-icon>
             <mat-icon class="colorDelete deleteIcon" (click)="deleteUser(row)"
               >delete_forever</mat-icon
