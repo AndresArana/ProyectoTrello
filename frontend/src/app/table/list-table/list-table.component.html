@@ -1,38 +1,34 @@
-<div class="container">
-  <div class="caja" *ngIf="tableData.length">
-    <mat-card
-      class="example-card"
-      *ngFor="let table of tableData; let i = index"
-    >
-      <mat-card-title>{{ table.name }}</mat-card-title>
-      <mat-card-content>
-        <p>{{ table.description }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <div class="multi-button">
-          <button
-            class="noselect"
-            [routerLink]="['/listTask', tableData[i]._id]"
-            class="tarea"
-          >
-            <mat-icon>subdirectory_arrow_right</mat-icon>Open
-          </button>
-          <button
-            class="noselect"
-            [routerLink]="['/saveTask', tableData[i]._id]"
-            class="tarea"
-          >
-            <mat-icon>control_point</mat-icon>Task
-          </button>
-          <button>
-            <mat-icon
-              class="colorDelete deleteIcon"
-              (click)="deleteTable(table)"
-              >delete_forever</mat-icon
+<div class="todo">
+  <div class="container">
+    <div class="caja" *ngIf="tableData.length">
+      <mat-card
+        class="example-card"
+        *ngFor="let table of tableData; let i = index"
+      >
+        <mat-card-title>{{ table.name }}</mat-card-title>
+        <mat-card-content>
+          <p>{{ table.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="multi-button">
+            <button
+              class="noselect"
+              [routerLink]="['/listTask', tableData[i]._id]"
+              class="tarea"
             >
-          </button>
-        </div>
-      </mat-card-actions>
-    </mat-card>
+              <mat-icon>subdirectory_arrow_right</mat-icon>Open
+            </button>
+
+            <button>
+              <mat-icon
+                class="colorDelete deleteIcon"
+                (click)="deleteTable(table)"
+                >delete_forever</mat-icon
+              >
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
   </div>
 </div>
