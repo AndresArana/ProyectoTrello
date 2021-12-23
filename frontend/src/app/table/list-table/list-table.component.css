@@ -1,7 +1,8 @@
 .todo {
   position: relative;
   min-height: 85vh;
-  margin: 40px;
+  display: flex;
+  justify-content: center;
 }
 * {
   padding: 0;
@@ -12,6 +13,7 @@
   display: flex;
   width: 170%;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .container {
@@ -22,13 +24,14 @@
 
 mat-card {
   margin: 5px;
-  width: 25%;
+  width: 230px;
 }
 
 mat-card-actions {
   position: relative;
   display: flex;
   justify-content: space-around;
+  align-items: flex-end;
 }
 body {
   height: 100vh;
@@ -67,4 +70,12 @@ button:hover {
 button:active {
   filter: none;
   transform: scale(0.95);
+}
+
+
+@media (max-width: 476px){
+  mat-card {
+    margin: 5px;
+    width: 100%;
+  }
 }
