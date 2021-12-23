@@ -1,1 +1,65 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 
+.caja {
+  display: flex;
+  width: 150%;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+mat-card {
+  margin: 5px;
+  width: 25%;
+}
+
+mat-card-actions {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+}
+body {
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+mat-icon {
+  width: 23px;
+  height: 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.multi-button button {
+  height: 45px;
+  width: 80px;
+  background: linear-gradient(to bottom, #0077b6, #48cae4);
+  font-weight: bold;
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  margin: -5px;
+  padding: 0;
+  stroke: rgb(97, 4, 247);
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+  filter: drop-shadow(3px 5px 5px rgba(0, 0, 0, 0.45));
+}
+button:active {
+  filter: none;
+  transform: scale(0.95);
+}

@@ -146,8 +146,12 @@
     <input type="checkbox" name="" id="check" />
 
     <a class="logo-containe" href="/listTask/"
-    ><img class="icono" src="../../../assets/icono.png" width="26" height="26"
-  /></a>
+      ><img
+        class="icono"
+        src="../../../assets/icono.png"
+        width="26"
+        height="26"
+    /></a>
 
     <div class="nav-btn">
       <div class="nav-links">
@@ -156,7 +160,7 @@
             <a href="#">Home</a>
           </li>
           <li
-          role="button"
+            role="button"
             class="nav-link"
             style="--i: 0.85s"
             *ngIf="_userService.loggedIn()"
@@ -177,7 +181,7 @@
             </div>
           </li>
           <li
-          role="button"
+            role="button"
             class="nav-link"
             style="--i: 0.85s"
             *ngIf="_userService.loggedIn() && _userService.isAdmin()"

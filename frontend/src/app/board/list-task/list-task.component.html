@@ -1,9 +1,11 @@
+<br />
+<div class="btnCrear">
+  <button class="crear" [routerLink]="['/saveTask/', _id]">Create task</button>
+</div>
+
 <div class="container">
   <div class="row">
     <div class="example-container col">
-      <button [routerLink]="['/saveTask/', _id]">
-        crear task
-      </button>
       <h2 class="nb1">To do</h2>
       <div
         cdkDropList
@@ -43,7 +45,6 @@
                       >
                         {{ item.taskStatus }}
                       </button>
-                      
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <mat-panel-description>
@@ -80,7 +81,7 @@
                     <span class="spacer"></span>
                     <mat-icon
                       class="editButton"
-                      id = "edit"
+                      id="edit"
                       color="primary"
                       [routerLink]="['/editTask/', item._id]"
                       >border_color
@@ -137,7 +138,6 @@
                       >
                         {{ item.taskStatus }}
                       </button>
-                      
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   <mat-panel-description>
@@ -247,21 +247,21 @@
                       mat-button
                       (click)="updateTask(item, 'to-do')"
                     >
-                      to-do
+                      <p>to-do</p>
                     </button>
                     <button
                       class="btnSelectInProgress"
                       mat-button
                       (click)="updateTask(item, 'in-progress')"
                     >
-                      In-progress
+                      <p>In-progress</p>
                     </button>
                     <button
                       class="btnSelectDone"
                       mat-button
                       (click)="updateTask(item, 'done')"
                     >
-                      done
+                      <p>done</p>
                     </button>
                     <span class="spacer"></span>
                     <mat-icon
@@ -280,7 +280,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
