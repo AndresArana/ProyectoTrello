@@ -1,11 +1,11 @@
 <div class="bgComponent">
   <div class="container">
     <div class="example-button-container">
-      <button mat-mini-fab class="button" routerLink="/registerRole">
+      <button mat-raised-button color="primary" routerLink="/registerRole">
         New Role
       </button>
     </div>
-    <br>
+    <br />
     <mat-form-field class="bgShearch">
       <mat-label>search Role</mat-label>
       <input
@@ -15,7 +15,7 @@
         #input
       />
     </mat-form-field>
-
+    <br />
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="NAME">
@@ -36,7 +36,6 @@
               [routerLink]="['/updateRole/', row._id]"
               >border_color</mat-icon
             >
-            <mat-icon>maximize</mat-icon>
             <mat-icon>maximize</mat-icon>
             <mat-icon class="colorDelete deleteIcon" (click)="deleteRole(row)"
               >delete_forever</mat-icon

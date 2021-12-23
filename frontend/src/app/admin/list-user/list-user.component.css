@@ -1,10 +1,7 @@
 .bgComponent {
-  background-color: #a5abaf;
   width: 100%;
   height: 100%;
   padding-bottom: 30%;
-  background:url("https://previews.123rf.com/images/hdesert/hdesert1611/hdesert161100244/68522437-cuaderno-y-l%C3%A1piz-en-blanco-con-la-lista-de-tareas-sobre-un-fondo-oscuro-de-la-madera.jpg");
-  
 }
 
 .container {
@@ -18,9 +15,15 @@ table {
   width: 100%;
 }
 
-.mat-form-field {
+mat-form-field {
   font-size: 14px;
   width: 100%;
+  padding: 0 20px;
+}
+
+input{
+  font-size: 16px;
+  letter-spacing: 2px;
 }
 
 td,
@@ -29,9 +32,9 @@ th {
 }
 
 .bgShearch {
-  background-color: #a5abaf;
+  background-color: #ffb703;
   color: #ffffff;
-  
+  border-radius: 30px;
 }
 
 .mat-icon {
