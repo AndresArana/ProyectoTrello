@@ -1,14 +1,11 @@
-<div class="cabe">
-  
-</div>
+<div class="cabe"></div>
 <section>
-  
   <div class="bgComponent">
     <div class="dos">
       <!-- <p>Administra tus horarios, tareas y carga de trabajo.</p> -->
       <img class="imagen" src="../../../assets/table.png" />
     </div>
-    
+
     <div class="form">
       <h2 class="text">YOUR WORK SPACES</h2>
       <mat-card-content>
@@ -20,12 +17,18 @@
 
           <div class="inputBx">
             <span>description</span>
-            <input [(ngModel)]="registerData.description" type="text" required />
+            <input
+              [(ngModel)]="registerData.description"
+              type="text"
+              required
+            />
           </div>
         </div>
       </mat-card-content>
       <div class="inputBx">
-        <button class="glow-on-hover" (click)="saveWorkB()">Create table</button>
+        <button class="glow-on-hover" (click)="saveWorkB()">
+          Create table
+        </button>
       </div>
     </div>
   </div>

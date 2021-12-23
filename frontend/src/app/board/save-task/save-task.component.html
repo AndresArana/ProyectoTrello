@@ -1,34 +1,38 @@
-<div class="bgComponent">
-  <div class="form">
-    <mat-card class="card">
-      <img class="imagen" src="../../../assets/tarea.jpg" />
-      <mat-card-title>Create Task</mat-card-title>
+<div class="cabe"></div>
+<section>
+  <div class="bgComponent">
+    <div class="dos">
+      <!-- <p>Administra tus horarios, tareas y carga de trabajo.</p> -->
+      <img class="imagen" src="../../../assets/tareas.png" width="95%" />
+    </div>
+
+    <div class="form">
+      <h2 class="text">READY TO FINISH YOUR TASKS?</h2>
       <mat-card-content>
         <div class="container">
-          <mat-form-field>
-            <input
-              [(ngModel)]="registerData.name"
-              matInput
-              placeholder="Task name"
-              required
-            />
-          </mat-form-field>
-          <mat-form-field>
+          <div class="inputBx">
+            <span>Table name</span>
+            <input [(ngModel)]="registerData.name" type="text" required />
+          </div>
+
+          <div class="inputBx">
+            <span>Description</span>
             <input
               [(ngModel)]="registerData.description"
-              matInput
-              placeholder="Description"
+              type="text"
               required
             />
-          </mat-form-field>
-          <input type="file" (change)="uploadImg($event)" />
+          </div>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-        <button (click)="saveTaskImg()" class="button" mat-raised-button>
+      <input type="file" (change)="uploadImg($event)" />
+
+      <div class="inputBx">
+        <br />
+        <button (click)="saveTaskImg()" class="glow-on-hover" mat-raised-button>
           Create
         </button>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </div>
   </div>
-</div>
+</section>
